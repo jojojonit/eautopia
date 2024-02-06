@@ -11,10 +11,28 @@ export async function signUp(userData) {
   });
   console.log("Response from backend:", res);
   if (res.ok) {
-    console.log("Return JSON");
+    // console.log("Return JSON");
     return res.json();
   } else {
     console.log("Error in signup");
     throw new Error("Invalid Sign Up");
+  }
+}
+
+export async function login(userData) {
+  console.log("Request login:", userData);
+
+  const res = await fetch(BASE_URL + "/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData),
+  });
+  console.log("Response from backend:", res);
+  if (res.ok) {
+    console.log("Login successful");
+    return res.json();
+  } else {
+    console.log("Error in login");
+    throw new Error("Invalid login");
   }
 }

@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { useState } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import { login } from "../../utilities/users-service";
 
 export default function Homepage() {
   const [open, setOpen] = useState(false);
@@ -14,13 +15,18 @@ export default function Homepage() {
     setOpen(false);
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
     }, 2000);
-    console.log("Received values of form: ", values);
+    try {
+      const user = await login(values);
+      console.log("Received values of form: ", values);
+    } catch {
+      console.error("Log In Failed - Try Again");
+    }
   };
   return (
     <>

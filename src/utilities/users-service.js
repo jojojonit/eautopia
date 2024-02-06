@@ -29,3 +29,28 @@ export function getToken() {
   }
   return token;
 }
+
+export async function login(userData) {
+  try {
+    const res = await usersAPI.login(userData);
+    const token = res.token;
+
+    if (!res) {
+      return null;
+    }
+
+    const payload = JSON.parse(atob(token.split(".")[1]));
+
+    if (payload.exp < Date.now() / 1000) {
+      localStorage.removeItem("token");
+      return null;
+    }
+
+    localStorage.setItem("token", token);
+    return res.user;
+  } catch (error) {
+    // Handle the login error
+    console.error("Error during login:", error.message);
+    throw error;
+  }
+}
