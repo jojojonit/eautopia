@@ -1,8 +1,14 @@
 import { Button, Form, Input } from "antd";
+import { signUp } from "../../utilities/users-service";
 
 export default function SignUpForm() {
-  const handleSubmit = (values) => {
-    console.log("Received values of form: ", values);
+  const handleSubmit = async (values) => {
+    try {
+      const user = await signUp(values);
+      console.log("Received values of form: ", user);
+    } catch (error) {
+      console.error("Error during signup:", error.message);
+    }
   };
 
   const formItemLayout = {
