@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { signUp } from "../../utilities/users-service";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm({ setUser }) {
   const [data, setData] = useState({
@@ -9,6 +10,8 @@ export default function SignUpForm({ setUser }) {
     password: "",
     confirm: "",
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     console.log("Signup values:", values);
@@ -22,6 +25,7 @@ export default function SignUpForm({ setUser }) {
     setData(dataObject);
     const user = await signUp(dataObject);
     setUser(user);
+    navigate("/account/user");
   };
 
   const formItemLayout = {
