@@ -13,21 +13,31 @@ function App() {
   return (
     <>
       <h1>eautopia</h1>
+
       <Routes>
         <Route path="/" element={<Homepage user={user} setUser={setUser} />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/account/login" element={<AuthPage setUser={setUser} />} />
-        <Route
-          path="/account/signup"
-          element={<SignUpPage setUser={setUser} />}
-        />
-        <Route
-          path="/account/user/"
-          element={<AccountPage user={user} setUser={setUser} />}
-        />
-
-        <Route path="/test" element={<SignUpPage />} />
       </Routes>
+      {user ? (
+        <Routes>
+          <Route path="/admin" element={<AdminPage />} />
+
+          <Route
+            path="/account/user/"
+            element={<AccountPage user={user} setUser={setUser} />}
+          />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route
+            path="/account/login"
+            element={<AuthPage setUser={setUser} />}
+          />
+          <Route
+            path="/account/signup"
+            element={<SignUpPage setUser={setUser} />}
+          />
+        </Routes>
+      )}
     </>
   );
 }

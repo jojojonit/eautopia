@@ -7,7 +7,7 @@ export default function Homepage({ user, setUser }) {
     <>
       <h1>Homepage</h1>
 
-      <Link to="/account/login">
+      <Link to={user ? "/account/user" : "/account/login"}>
         <Button type="primary">Account</Button>
       </Link>
 
