@@ -12,7 +12,7 @@ export default function AccountPage({ user, setUser }) {
   };
   return (
     <>
-      <h2>welcome, {user.name}</h2>
+      <h2>Hi, {user.name}</h2>
 
       <Button onClick={handleLogOut}>Log Out</Button>
     </>

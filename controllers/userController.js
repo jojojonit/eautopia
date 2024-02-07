@@ -71,8 +71,30 @@ const login = async (req, res) => {
   }
 };
 
+const updateAddress = async (req, res) => {
+  const { id } = req.params;
+  const newAddress = req.body;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    user.address.push(newAddress);
+    await user.save();
+
+    res.json({ msg: "Address added successfully", newAddress, user });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 module.exports = {
   getAll,
   create,
   login,
+  updateAddress,
 };

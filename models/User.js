@@ -1,6 +1,40 @@
 const bcrypt = require("bcrypt");
 const { Schema, model } = require("mongoose");
 
+const addressSchema = new Schema(
+  {
+    firstName: {
+      type: String,
+      // required: true,
+    },
+    lastName: {
+      type: String,
+      // required: true,
+    },
+    streetAddress: {
+      type: String,
+      // required: true,
+    },
+    apartment: {
+      type: String,
+    },
+    country: {
+      type: String,
+      // required: true,
+    },
+    city: {
+      type: String,
+    },
+    postal: {
+      type: String,
+      // required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const userSchema = new Schema(
   {
     name: {
@@ -15,6 +49,7 @@ const userSchema = new Schema(
       minLength: 3,
       required: true,
     },
+    address: [addressSchema],
   },
   {
     timestamps: true,
