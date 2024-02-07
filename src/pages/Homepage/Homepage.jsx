@@ -6,7 +6,7 @@ export default function Homepage({ user, setUser }) {
   return (
     <>
       <h1>Homepage</h1>
-      <h2>welcome, {user.name}</h2>
+
       <Link to="/account/login">
         <Button type="primary">Account</Button>
       </Link>

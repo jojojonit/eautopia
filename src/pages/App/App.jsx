@@ -3,9 +3,10 @@ import { getUser } from "../../utilities/users-service";
 import "./App.css";
 import AdminPage from "../AdminPage/AdminPage";
 import Homepage from "../Homepage/Homepage";
-import TestPage from "../Test/Test";
+import SignUpPage from "../SignUpPage/SignUpPage";
 import AuthPage from "../AuthPage/AuthPage";
 import { useState } from "react";
+import AccountPage from "../AccountPage/AccountPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -18,10 +19,14 @@ function App() {
         <Route path="/account/login" element={<AuthPage setUser={setUser} />} />
         <Route
           path="/account/signup"
-          element={<TestPage setUser={setUser} />}
+          element={<SignUpPage setUser={setUser} />}
+        />
+        <Route
+          path="/account/user/"
+          element={<AccountPage user={user} setUser={setUser} />}
         />
 
-        <Route path="/test" element={<TestPage />} />
+        <Route path="/test" element={<SignUpPage />} />
       </Routes>
     </>
   );

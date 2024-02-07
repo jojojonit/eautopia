@@ -11,7 +11,7 @@ export default function LoginForm({ setUser }) {
       const user = await login(values);
       setUser(user);
       console.log("Received values of form: ", user);
-      navigate("/");
+      navigate("/account/user");
     } catch (error) {
       console.log("Unable to login", error);
     }
