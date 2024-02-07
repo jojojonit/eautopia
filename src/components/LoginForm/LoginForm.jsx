@@ -1,18 +1,19 @@
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginForm() {
+export default function LoginForm({ setUser }) {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
       const user = await login(values);
-      console.log("Received values of form: ", values);
+      setUser(user);
+      console.log("Received values of form: ", user);
       navigate("/");
-    } catch {
-      console.error("Log In Failed - Try Again");
+    } catch (error) {
+      console.log("Unable to login", error);
     }
   };
   return (

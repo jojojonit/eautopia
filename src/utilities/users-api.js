@@ -2,16 +2,15 @@
 const BASE_URL = "/api/user";
 
 export async function signUp(userData) {
-  console.log("Request data:", userData);
+  //   console.log("Request data:", userData);
 
   const res = await fetch(BASE_URL + "/create", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
   });
-  console.log("Response from backend:", res);
+  //   console.log("Response from backend:", res);
   if (res.ok) {
-    // console.log("Return JSON");
     return res.json();
   } else {
     console.log("Error in signup");

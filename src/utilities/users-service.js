@@ -1,21 +1,13 @@
 import * as usersAPI from "./users-api";
 
-export async function signUp(userData) {
-  const res = await usersAPI.signUp(userData);
-  const token = res.token;
-  if (!res) {
-    return null;
-  }
-  const payload = JSON.parse(atob(token.split(".")[1]));
-  if (payload.exp < Date.now() / 1000) {
-    localStorage.removeItem("token");
-    return null;
-  }
-  localStorage.setItem("token", token);
-  return res.user;
+export function getUser() {
+  const token = getToken();
+  return token ? JSON.parse(atob(token.split(".")[1])).user : null;
 }
+
 export function getToken() {
   const token = localStorage.getItem("token");
+  console.log(token);
   if (!token) {
     return null;
   }
@@ -30,27 +22,14 @@ export function getToken() {
   return token;
 }
 
+export async function signUp(userData) {
+  const token = await usersAPI.signUp(userData);
+  localStorage.setItem("token", token);
+  return getUser();
+}
+
 export async function login(userData) {
-  try {
-    const res = await usersAPI.login(userData);
-    const token = res.token;
-
-    if (!res) {
-      return null;
-    }
-
-    const payload = JSON.parse(atob(token.split(".")[1]));
-
-    if (payload.exp < Date.now() / 1000) {
-      localStorage.removeItem("token");
-      return null;
-    }
-
-    localStorage.setItem("token", token);
-    return res.user;
-  } catch (error) {
-    // Handle the login error
-    console.error("Error during login:", error.message);
-    throw error;
-  }
+  const token = await usersAPI.login(userData);
+  localStorage.setItem("token", token);
+  return getUser();
 }

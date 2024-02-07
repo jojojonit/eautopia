@@ -1,14 +1,27 @@
 import { Button, Form, Input } from "antd";
 import { signUp } from "../../utilities/users-service";
+import { useState } from "react";
 
-export default function SignUpForm() {
+export default function SignUpForm({ setUser }) {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
+
   const handleSubmit = async (values) => {
-    try {
-      const user = await signUp(values);
-      console.log("Received values of form: ", user);
-    } catch (error) {
-      console.error("Error during signup:", error.message);
-    }
+    console.log("Signup values:", values);
+
+    const dataObject = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+
+    setData(dataObject);
+    const user = await signUp(dataObject);
+    setUser(user);
   };
 
   const formItemLayout = {
