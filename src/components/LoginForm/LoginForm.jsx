@@ -1,81 +1,74 @@
-import { Checkbox, Form, Input, Modal } from "antd";
+import { Button, Checkbox, Form, Input, Modal } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-export default function LoginForm({
-  open,
-  onFinish,
-  onCancel,
-  modalText,
-  confirmLoading,
-}) {
-  const [form] = Form.useForm();
+import { login } from "../../utilities/users-service";
+import { useNavigate } from "react-router-dom";
+
+export default function LoginForm() {
+  const navigate = useNavigate();
+
+  const onFinish = async (values) => {
+    try {
+      const user = await login(values);
+      console.log("Received values of form: ", values);
+      navigate("/");
+    } catch {
+      console.error("Log In Failed - Try Again");
+    }
+  };
   return (
     <>
-      <Modal
-        open={open}
-        title="Login"
-        okText="Login"
-        cancelText="Cancel"
-        onCancel={onCancel}
-        confirmLoading={confirmLoading}
-        onOk={() => {
-          form
-            .validateFields()
-            .then((values) => {
-              form.resetFields();
-              onFinish(values);
-            })
-            .catch((info) => {
-              console.log("Validate Failed:", info);
-            });
+      <Form
+        name="normal_login"
+        className="login-form"
+        initialValues={{
+          remember: true,
         }}
+        onFinish={onFinish}
       >
-        <Form
-          form={form}
-          name="normal_login"
-          className="login-form"
-          initialValues={{
-            remember: true,
-          }}
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your email",
+            },
+          ]}
         >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email",
-              },
-            ]}
-          >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="email"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Password!",
-              },
-            ]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="email"
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Password!",
+            },
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-          <br />
-          <Form.Item>
-            <a href="">register now!</a>
-          </Form.Item>
-        </Form>
-      </Modal>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Log in
+          </Button>
+          Or <a href="">register now!</a>
+        </Form.Item>
+      </Form>
     </>
   );
 }
