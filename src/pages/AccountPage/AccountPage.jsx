@@ -1,5 +1,5 @@
 import { Button, Menu } from "antd";
-import { logOut, getUser } from "../../utilities/users-service";
+import { logOut } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import DetailsContainer from "../../components/Account/DetailsContainer";
@@ -21,8 +21,9 @@ const items = [
 
 export default function AccountPage({ user, setUser }) {
   const [current, setCurrent] = useState("account");
-  console.log(user);
   const navigate = useNavigate();
+  const userId = user._id;
+
   const handleLogOut = () => {
     logOut();
     navigate("/");

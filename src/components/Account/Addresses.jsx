@@ -4,14 +4,13 @@ import { useState } from "react";
 import { addAddress } from "../../utilities/users-service";
 import AddressForm from "./AddressForm";
 
-export default function Addresses({ user }) {
+export default function Addresses({ user, addresses, loadAddresses }) {
   const [open, setOpen] = useState(false);
-  //   const [addressData, setAddressData] = useState({});
-  const addresses = user.address;
 
-  console.log("addresses", addresses);
   const userId = user._id;
+  const addressData = addresses.addresses;
 
+  console.log("addresses data", addressData);
   console.log("userid", userId);
 
   const handleOpen = () => {
@@ -41,6 +40,7 @@ export default function Addresses({ user }) {
       default: values.default,
     };
     const newAddress = await addAddress(userId, data);
+    loadAddresses();
     setOpen(false);
   };
 
@@ -48,9 +48,10 @@ export default function Addresses({ user }) {
     <>
       <h3>your addresses</h3>
 
-      {addresses.map((address) => (
+      {addressData.map((address, index) => (
         <Card
-          key={address.id}
+          key={index}
+          title={`${address.firstName} ${address.lastName || ""}`}
           style={{
             width: 300,
             border: address.default ? "1px solid #eb2f96" : "1px solid #d9d9d9",
@@ -67,13 +68,13 @@ export default function Addresses({ user }) {
               onClick={handleDelete}
             />,
           ]}
-          title={`${address.firstName} ${address.lastName}`}
         >
+          title={`${address.firstName} ${address.lastName || ""}`}
           <p>Street Address: {address.streetAddress}</p>
           <p>Apartment: {address.apartment}</p>
-          <p>Country: {address.country}</p>
+          <p>Country: {address.country || ""}</p>
           <p>City: {address.city}</p>
-          <p>Postal Code: {address.postal}</p>
+          <p>Postal Code: {address.postal || ""}</p>
         </Card>
       ))}
       <Button onClick={handleOpen}>Add new address</Button>

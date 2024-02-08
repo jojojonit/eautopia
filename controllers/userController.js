@@ -92,9 +92,30 @@ const updateAddress = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+const getAddresses = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const addresses = user.address;
+
+    res.json({ addresses });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 module.exports = {
   getAll,
   create,
   login,
   updateAddress,
+  getAddresses,
 };

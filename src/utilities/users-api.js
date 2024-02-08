@@ -51,3 +51,19 @@ export async function addAddress(userId, addressData) {
     throw new Error("Invalid (addAddress)");
   }
 }
+
+export async function getAddresses(userId) {
+  const res = await fetch(BASE_URL + `/${userId}/address`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    // body: JSON.stringify(addressData),
+  });
+  console.log("Response from backend:", res);
+  if (res.ok) {
+    console.log("Addresses fetched successfully");
+    return res.json();
+  } else {
+    console.log("Error in fetching addresses");
+    throw new Error("Invalid (getAddresses)");
+  }
+}

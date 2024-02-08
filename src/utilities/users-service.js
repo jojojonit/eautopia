@@ -42,3 +42,8 @@ export async function addAddress(userId, addressData) {
   const response = await usersAPI.addAddress(userId, addressData);
   return response;
 }
+
+export async function getAddresses(userId) {
+  const response = await usersAPI.getAddresses(userId);
+  return response;
+}
