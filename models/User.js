@@ -5,29 +5,31 @@ const addressSchema = new Schema(
   {
     firstName: {
       type: String,
-      // required: true,
+      required: true,
     },
     lastName: {
       type: String,
-      // required: true,
     },
     streetAddress: {
       type: String,
-      // required: true,
+      required: true,
     },
     apartment: {
       type: String,
     },
     country: {
       type: String,
-      // required: true,
+      required: true,
     },
     city: {
       type: String,
     },
     postal: {
       type: String,
-      // required: true,
+      required: true,
+    },
+    default: {
+      type: Boolean,
     },
   },
   {

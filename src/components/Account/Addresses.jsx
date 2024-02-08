@@ -24,6 +24,7 @@ export default function Addresses({ user }) {
           key={address.id}
           style={{
             width: 300,
+            border: address.default ? "1px solid #eb2f96" : "1px solid #d9d9d9",
           }}
           actions={[
             <EditTwoTone
