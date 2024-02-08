@@ -1,11 +1,18 @@
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import { Button, Card } from "antd";
 import { useState } from "react";
-import { addAddress, deleteAddress } from "../../utilities/users-service";
+import {
+  addAddress,
+  deleteAddress,
+  editAddress,
+} from "../../utilities/users-service";
 import AddressForm from "./AddressForm";
+import EditAddressForm from "./EditAddressForm";
 
 export default function Addresses({ user, addresses, loadAddresses }) {
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selectedAddressId, setSelectedAddressId] = useState();
 
   const userId = user._id;
   const addressData = addresses.addresses;
@@ -22,6 +29,8 @@ export default function Addresses({ user, addresses, loadAddresses }) {
   };
 
   const handleEdit = (addressId) => {
+    setSelectedAddressId(addressId);
+    setOpenEdit(true);
     console.log("edit address", addressId);
   };
 
@@ -53,6 +62,27 @@ export default function Addresses({ user, addresses, loadAddresses }) {
     setOpen(false);
   };
 
+  const onSave = async (values) => {
+    console.log("Address EDIT values: ", values);
+
+    const data = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      streetAddress: values.streetAddress,
+      apartment: values.apartment,
+      country: values.country,
+      city: values.city,
+      postal: values.postal,
+      default: values.default,
+    };
+
+    console.log("formatted values", data, selectedAddressId);
+
+    const response = await editAddress(userId, selectedAddressId, data);
+    console.log("Edit success", data, userId);
+    loadAddresses();
+    setOpenEdit(false);
+  };
   return (
     <>
       <h3>your addresses</h3>
@@ -91,8 +121,20 @@ export default function Addresses({ user, addresses, loadAddresses }) {
         open={open}
         onCreate={onCreate}
         onCancel={() => {
+          console.log("close create form");
           setOpen(false);
         }}
+      />
+
+      <EditAddressForm
+        openEdit={openEdit}
+        onSave={onSave}
+        onCancel={() => {
+          console.log("close edit form");
+          setOpenEdit(false);
+        }}
+        prevAddress={addressData}
+        addressId={selectedAddressId}
       />
     </>
   );
