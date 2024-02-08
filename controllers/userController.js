@@ -133,6 +133,36 @@ const deleteAddress = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+const editAddress = async (req, res) => {
+  const { id, addressId } = req.params;
+  const newAddress = req.body;
+
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    const addressToEdit = user.address.id(addressId);
+    if (!addressToEdit) {
+      return res.status(404).json({ error: "Address TO EDIT not found" });
+    }
+
+    Object.keys(newAddress).forEach((key) => {
+      if (addressToEdit[key] !== undefined) {
+        addressToEdit[key] = newAddress[key];
+      }
+    });
+    await user.save();
+
+    res.json({ message: "Address EDITTED successfully", user });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   getAll,
   create,
@@ -140,4 +170,5 @@ module.exports = {
   updateAddress,
   getAddresses,
   deleteAddress,
+  editAddress,
 };
