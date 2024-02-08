@@ -1,7 +1,7 @@
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import { Button, Card } from "antd";
 import { useState } from "react";
-import { addAddress } from "../../utilities/users-service";
+import { addAddress, deleteAddress } from "../../utilities/users-service";
 import AddressForm from "./AddressForm";
 
 export default function Addresses({ user, addresses, loadAddresses }) {
@@ -9,9 +9,12 @@ export default function Addresses({ user, addresses, loadAddresses }) {
 
   const userId = user._id;
   const addressData = addresses.addresses;
+  //   const addressId = addressData.map((address) => address._id);
 
-  console.log("addresses data", addressData);
-  console.log("userid", userId);
+  //   console.log("CHECKING ADDID", addressId);
+
+  //   console.log("addresses data", addressData);
+  //   console.log("userid", userId);
 
   const handleOpen = () => {
     setOpen(true);
@@ -22,8 +25,14 @@ export default function Addresses({ user, addresses, loadAddresses }) {
     console.log("edit address");
   };
 
-  const handleDelete = () => {
-    console.log("delete address");
+  const handleDelete = async (addressId) => {
+    try {
+      const response = await deleteAddress(userId, addressId);
+      loadAddresses();
+      console.log("deleted successfully", addressId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onCreate = async (values) => {
@@ -51,6 +60,7 @@ export default function Addresses({ user, addresses, loadAddresses }) {
       {addressData.map((address, index) => (
         <Card
           key={index}
+          addressid={`${address._id}`}
           title={`${address.firstName} ${address.lastName || ""}`}
           style={{
             width: 300,
@@ -65,11 +75,10 @@ export default function Addresses({ user, addresses, loadAddresses }) {
             <DeleteTwoTone
               twoToneColor="#eb2f96"
               key="delete"
-              onClick={handleDelete}
+              onClick={() => handleDelete(address._id)}
             />,
           ]}
         >
-          title={`${address.firstName} ${address.lastName || ""}`}
           <p>Street Address: {address.streetAddress}</p>
           <p>Apartment: {address.apartment}</p>
           <p>Country: {address.country || ""}</p>

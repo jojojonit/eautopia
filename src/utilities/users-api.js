@@ -1,4 +1,3 @@
-// This is the base path of the Express route we'll define
 const BASE_URL = "/api/user";
 
 export async function signUp(userData) {
@@ -56,7 +55,6 @@ export async function getAddresses(userId) {
   const res = await fetch(BASE_URL + `/${userId}/address`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
-    // body: JSON.stringify(addressData),
   });
   console.log("Response from backend:", res);
   if (res.ok) {
@@ -64,6 +62,22 @@ export async function getAddresses(userId) {
     return res.json();
   } else {
     console.log("Error in fetching addresses");
+    throw new Error("Invalid (getAddresses)");
+  }
+}
+
+export async function deleteAddress(userId, addressId) {
+  const res = await fetch(BASE_URL + `/${userId}/deleteAddress/${addressId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  console.log("Response from backend:", res);
+  if (res.ok) {
+    const data = await res.json();
+    console.log("Address DELETED successfully", data);
+  } else {
+    const errorData = await res.json();
+    console.error("Error in DELETING address", errorData);
     throw new Error("Invalid (getAddresses)");
   }
 }

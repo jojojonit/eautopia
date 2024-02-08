@@ -47,3 +47,8 @@ export async function getAddresses(userId) {
   const response = await usersAPI.getAddresses(userId);
   return response;
 }
+
+export async function deleteAddress(userId, addressId) {
+  const response = await usersAPI.deleteAddress(userId, addressId);
+  return response;
+}

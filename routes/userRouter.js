@@ -7,4 +7,5 @@ router.post("/create", userController.create);
 router.post("/login", userController.login);
 router.get("/:id/address", userController.getAddresses);
 router.post("/:id/addAddress", userController.updateAddress);
+router.delete("/:id/deleteAddress/:addressId", userController.deleteAddress);
 module.exports = router;

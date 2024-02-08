@@ -112,10 +112,32 @@ const getAddresses = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+const deleteAddress = async (req, res) => {
+  const { id, addressId } = req.params;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    user.address = user.address.filter((address) => address._id != addressId);
+    await user.save();
+
+    res.json({ message: "Address deleted successfully", user });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 module.exports = {
   getAll,
   create,
   login,
   updateAddress,
   getAddresses,
+  deleteAddress,
 };
