@@ -1,11 +1,18 @@
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import { Button, Card } from "antd";
 import { useState } from "react";
+import { addAddress } from "../../utilities/users-service";
 import AddressForm from "./AddressForm";
 
 export default function Addresses({ user }) {
   const [open, setOpen] = useState(false);
+  //   const [addressData, setAddressData] = useState({});
   const addresses = user.address;
+
+  console.log("addresses", addresses);
+  const userId = user._id;
+
+  console.log("userid", userId);
 
   const handleOpen = () => {
     setOpen(true);
@@ -20,8 +27,20 @@ export default function Addresses({ user }) {
     console.log("delete address");
   };
 
-  const onCreate = (values) => {
-    console.log("Received values of form: ", values);
+  const onCreate = async (values) => {
+    console.log("Address values: ", values);
+
+    const data = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      streetAddress: values.streetAddress,
+      apartment: values.apartment,
+      country: values.country,
+      city: values.city,
+      postal: values.postal,
+      default: values.default,
+    };
+    const newAddress = await addAddress(userId, data);
     setOpen(false);
   };
 

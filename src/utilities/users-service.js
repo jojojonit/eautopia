@@ -37,3 +37,8 @@ export async function login(userData) {
 export function logOut() {
   localStorage.removeItem("token");
 }
+
+export async function addAddress(userId, addressData) {
+  const response = await usersAPI.addAddress(userId, addressData);
+  return response;
+}
