@@ -1,10 +1,14 @@
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import { Button, Card } from "antd";
+import { useState } from "react";
+import AddressForm from "./AddressForm";
 
 export default function Addresses({ user }) {
+  const [open, setOpen] = useState(false);
   const addresses = user.address;
 
-  const handleAdd = () => {
+  const handleOpen = () => {
+    setOpen(true);
     console.log("add new address");
   };
 
@@ -15,6 +19,12 @@ export default function Addresses({ user }) {
   const handleDelete = () => {
     console.log("delete address");
   };
+
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values);
+    setOpen(false);
+  };
+
   return (
     <>
       <h3>your addresses</h3>
@@ -47,7 +57,14 @@ export default function Addresses({ user }) {
           <p>Postal Code: {address.postal}</p>
         </Card>
       ))}
-      <Button onClick={handleAdd}>Add new address</Button>
+      <Button onClick={handleOpen}>Add new address</Button>
+      <AddressForm
+        open={open}
+        onCreate={onCreate}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />
     </>
   );
 }
