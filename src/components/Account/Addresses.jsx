@@ -21,8 +21,8 @@ export default function Addresses({ user, addresses, loadAddresses }) {
     console.log("add new address");
   };
 
-  const handleEdit = () => {
-    console.log("edit address");
+  const handleEdit = (addressId) => {
+    console.log("edit address", addressId);
   };
 
   const handleDelete = async (addressId) => {
@@ -70,7 +70,7 @@ export default function Addresses({ user, addresses, loadAddresses }) {
             <EditTwoTone
               twoToneColor="#eb2f96"
               key="edit"
-              onClick={handleEdit}
+              onClick={() => handleEdit(address._id)}
             />,
             <DeleteTwoTone
               twoToneColor="#eb2f96"

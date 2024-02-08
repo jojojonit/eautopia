@@ -78,6 +78,23 @@ export async function deleteAddress(userId, addressId) {
   } else {
     const errorData = await res.json();
     console.error("Error in DELETING address", errorData);
-    throw new Error("Invalid (getAddresses)");
+    throw new Error("Invalid (deleteAddress)");
+  }
+}
+
+export async function editAddress(userId, addressId, addressData) {
+  const res = await fetch(BASE_URL + `/${userId}/editAddress/${addressId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(addressData),
+  });
+  console.log("Response from backend:", res);
+  if (res.ok) {
+    const data = await res.json();
+    console.log("Address EDITED successfully", data);
+  } else {
+    const errorData = await res.json();
+    console.error("Error in EDITING address", errorData);
+    throw new Error("Invalid (editAddress)");
   }
 }

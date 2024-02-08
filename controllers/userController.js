@@ -155,7 +155,7 @@ const editAddress = async (req, res) => {
     });
     await user.save();
 
-    res.json({ message: "Address EDITTED successfully", user });
+    res.json({ message: "Address EDITED successfully", user });
   } catch (error) {
     console.error(error); // Log the error for debugging purposes
 

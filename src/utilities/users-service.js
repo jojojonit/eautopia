@@ -52,3 +52,8 @@ export async function deleteAddress(userId, addressId) {
   const response = await usersAPI.deleteAddress(userId, addressId);
   return response;
 }
+
+export async function editAddress(userId, addressId, addressData) {
+  const response = await usersAPI.editAddress(userId, addressId, addressData);
+  return response;
+}
