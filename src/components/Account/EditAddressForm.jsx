@@ -23,7 +23,7 @@ export default function EditAddressForm({
         form
           .validateFields()
           .then((values) => {
-            // form.resetFields();
+            form.resetFields();
             onSave(values);
           })
           .catch((info) => {

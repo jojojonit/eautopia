@@ -12,7 +12,7 @@ import EditAddressForm from "./EditAddressForm";
 export default function Addresses({ user, addresses, loadAddresses }) {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [selectedAddressId, setSelectedAddressId] = useState();
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
 
   const userId = user._id;
   const addressData = addresses.addresses;
