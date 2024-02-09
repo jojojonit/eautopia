@@ -9,7 +9,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const create = async (req, res) => {
+const createProduct = async (req, res) => {
   const data = req.body;
   try {
     const product = await Product.create(data);
@@ -19,7 +19,7 @@ const create = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {
+const updateProduct = async (req, res) => {
   const { id } = req.params;
   const newData = req.body;
   try {
@@ -38,14 +38,25 @@ const update = async (req, res) => {
     await product.save();
     res
       .status(200)
-      .json({ message: "Product UPDATED successfully", product, id, newData });
+      .json({ message: "Product UPDATED successfully", product, id });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
+const deleteProduct = async (req, res) => {
+  const data = req.body;
+  try {
+    const product = await Product.deleteOne(data);
+    res.status(200).json({ message: "Product DELETED successfullt", product });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   getAll,
-  create,
-  update,
+  createProduct,
+  updateProduct,
+  deleteProduct,
 };
