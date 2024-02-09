@@ -9,6 +9,17 @@ const getAll = async (req, res) => {
   }
 };
 
+const create = async (req, res) => {
+  const data = req.body;
+  try {
+    const product = await Product.create(data);
+    res.status(200).json({ product });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   getAll,
+  create,
 };
