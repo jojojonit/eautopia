@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("path");
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
+const categoryRouter = require("./routes/categoryRouter");
 // const logger = require("morgan");
 
 const server = express();
@@ -18,6 +19,7 @@ server.get("/test", (req, res) => {
 
 server.use("/api/user", userRouter);
 server.use("/api/product", productRouter);
+server.use("/api/category", categoryRouter);
 
 //listen block
 const port = process.env.PORT || 3000;
