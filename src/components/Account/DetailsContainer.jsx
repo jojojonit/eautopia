@@ -9,6 +9,10 @@ export default function DetailsContainer({ current, user }) {
 
   const userId = user._id;
 
+  useEffect(() => {
+    loadAddresses();
+  }, [userId]);
+
   const loadAddresses = async () => {
     try {
       const response = await getAddresses(userId);
@@ -17,10 +21,6 @@ export default function DetailsContainer({ current, user }) {
       console.error("Error fetching addresses:", error);
     }
   };
-
-  useEffect(() => {
-    loadAddresses();
-  }, [userId]);
 
   const detailsComponents = {
     account: <Account user={user} />,

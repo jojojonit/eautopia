@@ -20,8 +20,14 @@ function App() {
       </Routes>
       {user ? (
         <Routes>
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/create" element={<CreateProductPage />} />
+          <Route
+            path="/admin"
+            element={<AdminPage user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/admin/create"
+            element={<CreateProductPage user={user} setUser={setUser} />}
+          />
 
           <Route
             path="/account/user/"
