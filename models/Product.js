@@ -34,9 +34,13 @@ const productSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Category",
     },
-    inventory_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Inventory",
+    // inventory_id: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Inventory",
+    // },
+    stock: {
+      type: Number,
+      required: true,
     },
   },
   {
