@@ -52,7 +52,12 @@ const userSchema = new Schema(
       required: true,
     },
     address: [addressSchema],
+    role: {
+      type: String,
+      default: "user",
+    },
   },
+
   {
     timestamps: true,
     toJSON: {
