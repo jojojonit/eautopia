@@ -7,6 +7,7 @@ import SignUpPage from "../SignUpPage/SignUpPage";
 import AuthPage from "../AuthPage/AuthPage";
 import { useState } from "react";
 import AccountPage from "../AccountPage/AccountPage";
+import CreateProductPage from "../AdminPage/CreateProductPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -20,6 +21,7 @@ function App() {
       {user ? (
         <Routes>
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/create" element={<CreateProductPage />} />
 
           <Route
             path="/account/user/"
