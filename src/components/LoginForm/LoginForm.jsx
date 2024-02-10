@@ -10,8 +10,12 @@ export default function LoginForm({ setUser }) {
     try {
       const user = await login(values);
       setUser(user);
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/account/user");
+      }
       console.log("Received values of form: ", user);
-      navigate("/account/user");
     } catch (error) {
       console.log("Unable to login", error);
     }
