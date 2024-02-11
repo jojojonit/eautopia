@@ -19,6 +19,4 @@ router.put(
   userController.editAddress
 );
 
-router.get("/check-token", userController.checkToken);
-
 module.exports = router;

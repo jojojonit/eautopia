@@ -16,12 +16,6 @@ export default function Addresses({ user, addresses, loadAddresses }) {
 
   const userId = user._id;
   const addressData = addresses.addresses;
-  //   const addressId = addressData.map((address) => address._id);
-
-  //   console.log("CHECKING ADDID", addressId);
-
-  //   console.log("addresses data", addressData);
-  //   console.log("userid", userId);
 
   const handleOpen = () => {
     setOpen(true);
@@ -29,9 +23,9 @@ export default function Addresses({ user, addresses, loadAddresses }) {
   };
 
   const handleEdit = (addressId) => {
+    console.log(addressId);
     setSelectedAddressId(addressId);
     setOpenEdit(true);
-    console.log("edit address", addressId);
   };
 
   const handleDelete = async (addressId) => {
@@ -45,21 +39,8 @@ export default function Addresses({ user, addresses, loadAddresses }) {
   };
 
   const onCreate = async (values) => {
-    console.log("START ONCREATE IN PAGE");
-    console.log("Address values: ", values);
-
-    // const data = {
-    //   firstName: values.firstName,
-    //   lastName: values.lastName,
-    //   streetAddress: values.streetAddress,
-    //   apartment: values.apartment,
-    //   country: values.country,
-    //   city: values.city,
-    //   postal: values.postal,
-    //   default: values.default,
-    // };
     const newAddress = await addAddress(userId, values);
-    console.log("ENDS HERE");
+
     loadAddresses();
     setOpen(false);
   };
@@ -84,6 +65,7 @@ export default function Addresses({ user, addresses, loadAddresses }) {
     console.log("Edit success", data, userId);
     loadAddresses();
     setOpenEdit(false);
+    setSelectedAddressId(null);
   };
   return (
     <>

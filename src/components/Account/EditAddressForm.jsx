@@ -1,17 +1,27 @@
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { Form, Input, Modal, Switch } from "antd";
+import { useEffect } from "react";
 
 export default function EditAddressForm({
   openEdit,
   onSave,
   onCancel,
+
   prevAddress,
   addressId,
 }) {
-  console.log("THIS ADDRESS ID", addressId);
   const initialAddress = prevAddress.find((item) => item._id === addressId);
   console.log("INITIAL values of address", initialAddress);
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    const initialAddress = prevAddress.find((item) => item._id === addressId);
+
+    if (initialAddress) {
+      form.setFieldsValue(initialAddress);
+    }
+  }, [addressId, form, prevAddress]);
+
   return (
     <Modal
       open={openEdit}
@@ -37,7 +47,6 @@ export default function EditAddressForm({
         layout="vertical"
         initialValues={{
           modifier: "public",
-          ...initialAddress,
         }}
       >
         <Form.Item
