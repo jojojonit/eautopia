@@ -9,3 +9,8 @@ export async function createProduct(productData) {
   const response = await productsAPI.createProduct(productData);
   return response;
 }
+
+export async function deleteProduct(productId) {
+  const response = await productsAPI.deleteProduct(productId);
+  return response;
+}

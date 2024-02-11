@@ -25,3 +25,17 @@ export async function createProduct(productData) {
     return null;
   }
 }
+
+export async function deleteProduct(productId) {
+  try {
+    const res = await sendRequest(BASE_URL + `/${productId}/delete`, "DELETE");
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res;
+    }
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    return null;
+  }
+}

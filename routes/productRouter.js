@@ -10,6 +10,11 @@ router.get("/", productController.getAll);
 //admin routes
 router.post("/create", checkToken, checkAdmin, productController.createProduct);
 router.patch("/:id/update", productController.updateProduct);
-router.delete("/delete", productController.deleteProduct);
+router.delete(
+  "/:id/delete",
+  checkToken,
+  checkAdmin,
+  productController.deleteProduct
+);
 
 module.exports = router;
