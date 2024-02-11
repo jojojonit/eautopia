@@ -72,6 +72,8 @@ const login = async (req, res) => {
 };
 
 const updateAddress = async (req, res) => {
+  const userId = req.user._id;
+  console.log("userID", req.user._id);
   const { id } = req.params;
   const newAddress = req.body;
 
@@ -105,7 +107,7 @@ const getAddresses = async (req, res) => {
 
     const addresses = user.address;
 
-    res.json({ addresses });
+    res.json({ msg: "ADDRESS FETCHED SUCCESS", addresses });
   } catch (error) {
     console.error(error); // Log the error for debugging purposes
 
@@ -163,6 +165,12 @@ const editAddress = async (req, res) => {
   }
 };
 
+function checkToken(req, res) {
+  // req.user will always be there for you when a token is sent
+  console.log("req.user", req.user);
+  res.json(req.exp);
+}
+
 module.exports = {
   getAll,
   create,
@@ -171,4 +179,5 @@ module.exports = {
   getAddresses,
   deleteAddress,
   editAddress,
+  checkToken,
 };

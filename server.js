@@ -12,6 +12,7 @@ const server = express();
 //middleware block
 server.use(express.json());
 server.use(express.static(path.join(__dirname, "dist")));
+// server.use(require("./config/checkToken"));
 
 server.get("/test", (req, res) => {
   res.json({ hello: "world" });

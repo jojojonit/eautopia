@@ -1,3 +1,5 @@
+import { getToken } from "./users-service";
+import sendRequest from "./send-request";
 const BASE_URL = "/api/user";
 
 export async function signUp(userData) {
@@ -52,11 +54,8 @@ export async function addAddress(userId, addressData) {
 }
 
 export async function getAddresses(userId) {
-  const res = await fetch(BASE_URL + `/${userId}/address`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  console.log("Response from backend:", res);
+  console.log("FETCH ADDRES USERID", userId);
+  const res = await sendRequest(BASE_URL + `/${userId}/address`, "GET");
   if (res.ok) {
     console.log("Addresses fetched successfully");
     return res.json();

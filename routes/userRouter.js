@@ -11,4 +11,6 @@ router.post("/:id/addAddress", userController.updateAddress);
 router.delete("/:id/deleteAddress/:addressId", userController.deleteAddress);
 router.put("/:id/editAddress/:addressId", userController.editAddress);
 
+router.get("/check-token", userController.checkToken);
+
 module.exports = router;
