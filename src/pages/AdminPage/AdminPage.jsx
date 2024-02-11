@@ -8,8 +8,6 @@ export default function AdminPage({ admin, setAdmin, user, setUser }) {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  console.log("ADMIN: PAGE", admin);
-
   useEffect(() => {
     loadProducts();
   }, [user]);

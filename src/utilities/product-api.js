@@ -1,5 +1,4 @@
-// import { checkAdmin } from "../../config/checkAdmin";
-
+import sendRequest from "./send-request";
 const BASE_URL = "/api/product";
 
 export async function getAllProducts() {
@@ -15,17 +14,7 @@ export async function getAllProducts() {
 
 export async function createProduct(productData) {
   try {
-    // const isAdmin = await checkAdmin();
-
-    // if (!isAdmin) {
-    //   throw new Error("Unauthorized: Only admin users can create products.");
-    // }
-
-    const res = await fetch(BASE_URL + "/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(productData),
-    });
+    const res = await sendRequest(BASE_URL + "/create", "POST", productData);
     if (res.ok) {
       return res.json();
     } else {
