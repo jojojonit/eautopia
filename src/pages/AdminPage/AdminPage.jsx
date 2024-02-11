@@ -10,6 +10,7 @@ const { Meta } = Card;
 
 export default function AdminPage({ admin, setAdmin, user, setUser }) {
   const [loading, setLoading] = useState(true);
+  const [formView, setFormView] = useState(true);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -79,26 +80,12 @@ export default function AdminPage({ admin, setAdmin, user, setUser }) {
             description={`#ID ${product._id}`}
           />
 
-          <p>{product.description}</p>
-          <p>{product.category_id}</p>
-          <p>{product.price}</p>
-          <p>{product.stock}</p>
+          <p>Description: {product.description}</p>
+          <p>Category: {product.category_id}</p>
+          <p>Price: {product.price}</p>
+          <p>Units: {product.stock}</p>
         </Card>
       ))}
-
-      {/* {products.map((product) => (
-        <>
-          <p>{product.name}</p>
-          <p>{product.description}</p>
-          <p>{product.category_id}</p>
-          <p>{product.price}</p>
-          <p>{product.stock}</p>
-          <p>{product._id}</p>
-          <Button>Update</Button>
-          <Button onClick={handleDelete}>Remove</Button>
-          <hr />
-        </>
-      ))} */}
 
       <Button onClick={handleAdd}>Add new product</Button>
       <Button onClick={handleLogOut}>Log Out</Button>
