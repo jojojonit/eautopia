@@ -8,7 +8,11 @@ router.post("/create", userController.create);
 router.post("/login", userController.login);
 router.get("/:id/address", checkToken, userController.getAddresses);
 router.post("/:id/addAddress", checkToken, userController.updateAddress);
-router.delete("/:id/deleteAddress/:addressId", userController.deleteAddress);
+router.delete(
+  "/:id/deleteAddress/:addressId",
+  checkToken,
+  userController.deleteAddress
+);
 router.put("/:id/editAddress/:addressId", userController.editAddress);
 
 router.get("/check-token", userController.checkToken);

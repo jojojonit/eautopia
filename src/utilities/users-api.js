@@ -37,22 +37,6 @@ export async function login(userData) {
   }
 }
 
-// export async function addAddress(userId, addressData) {
-//   const res = await fetch(BASE_URL + `/${userId}/addAddress`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(addressData),
-//   });
-//   console.log("Response from backend:", res);
-//   if (res.ok) {
-//     console.log("Address added successfully");
-//     return res.json();
-//   } else {
-//     console.log("Error in adding address");
-//     throw new Error("Invalid (addAddress)");
-//   }
-// }
-
 export async function addAddress(userId, addressData) {
   const res = await sendRequest(
     BASE_URL + `/${userId}/addAddress`,
@@ -82,10 +66,11 @@ export async function getAddresses(userId) {
 }
 
 export async function deleteAddress(userId, addressId) {
-  const res = await fetch(BASE_URL + `/${userId}/deleteAddress/${addressId}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  });
+  const res = await sendRequest(
+    BASE_URL + `/${userId}/deleteAddress/${addressId}`,
+    "DELETE"
+  );
+
   console.log("Response from backend:", res);
   if (res.ok) {
     const data = await res.json();
