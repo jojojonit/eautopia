@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { createProduct } from "../../utilities/product-service";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateProductPage({ user, setUser }) {
+export default function CreateProductPage({ admin, setAdmin }) {
   const navigate = useNavigate();
   const [items, setItems] = useState(["65c7a08bfc736911bf949631"]);
   const [name, setName] = useState("");
@@ -23,7 +23,7 @@ export default function CreateProductPage({ user, setUser }) {
     }, 0);
   };
 
-  console.log("USER", user);
+  console.log("create product:USER", admin);
 
   const onFinish = async (values) => {
     const data = {

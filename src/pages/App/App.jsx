@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { getUser } from "../../utilities/users-service";
+import { getAdmin, getUser } from "../../utilities/users-service";
 import "./App.css";
 import AdminPage from "../AdminPage/AdminPage";
 import Homepage from "../Homepage/Homepage";
@@ -11,6 +11,11 @@ import CreateProductPage from "../AdminPage/CreateProductPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
+  const [admin, setAdmin] = useState(getAdmin());
+
+  console.log("user check", user);
+
+  console.log("admin check", admin);
   return (
     <>
       <h1>eautopia</h1>
@@ -22,11 +27,18 @@ function App() {
         <Routes>
           <Route
             path="/admin"
-            element={<AdminPage user={user} setUser={setUser} />}
+            element={
+              <AdminPage
+                admin={admin}
+                setAdmin={setAdmin}
+                user={user}
+                setUser={setUser}
+              />
+            }
           />
           <Route
             path="/admin/create"
-            element={<CreateProductPage user={user} setUser={setUser} />}
+            element={<CreateProductPage admin={admin} setAdmin={setAdmin} />}
           />
 
           <Route

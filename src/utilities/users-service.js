@@ -5,6 +5,11 @@ export function getUser() {
   return token ? JSON.parse(atob(token.split(".")[1])).user : null;
 }
 
+export function getAdmin() {
+  const token = getToken();
+  return token ? JSON.parse(atob(token.split(".")[1])).user.role : null;
+}
+
 export function getToken() {
   const token = localStorage.getItem("token");
   console.log(token);
@@ -13,6 +18,7 @@ export function getToken() {
   }
   // Obtain the payload of the token
   const payload = JSON.parse(atob(token.split(".")[1]));
+  console.log("get token", payload.user);
   // A JWT's exp is expressed in seconds, not milliseconds, so convert
   if (payload.exp < Date.now() / 1000) {
     // Token has expired - remove it from localStorage

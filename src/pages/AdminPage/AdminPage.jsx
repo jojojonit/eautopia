@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../../utilities/product-service";
 import { logOut } from "../../utilities/users-service";
 
-export default function AdminPage({ user, setUser }) {
+export default function AdminPage({ admin, setAdmin, user, setUser }) {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  console.log("ADMIN: PAGE", admin);
 
   useEffect(() => {
     loadProducts();
@@ -36,9 +38,6 @@ export default function AdminPage({ user, setUser }) {
   return (
     <>
       <h1>Admin Page</h1>
-
-      {/* <p>{products[0].name}</p>
-      <p>{products[0].description}</p> */}
 
       {products.map((product) => (
         <>
