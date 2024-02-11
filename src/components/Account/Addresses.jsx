@@ -45,19 +45,21 @@ export default function Addresses({ user, addresses, loadAddresses }) {
   };
 
   const onCreate = async (values) => {
+    console.log("START ONCREATE IN PAGE");
     console.log("Address values: ", values);
 
-    const data = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      streetAddress: values.streetAddress,
-      apartment: values.apartment,
-      country: values.country,
-      city: values.city,
-      postal: values.postal,
-      default: values.default,
-    };
-    const newAddress = await addAddress(userId, data);
+    // const data = {
+    //   firstName: values.firstName,
+    //   lastName: values.lastName,
+    //   streetAddress: values.streetAddress,
+    //   apartment: values.apartment,
+    //   country: values.country,
+    //   city: values.city,
+    //   postal: values.postal,
+    //   default: values.default,
+    // };
+    const newAddress = await addAddress(userId, values);
+    console.log("ENDS HERE");
     loadAddresses();
     setOpen(false);
   };

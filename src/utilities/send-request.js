@@ -29,7 +29,9 @@ export default async function sendRequest(url, method = "GET", payload = null) {
       //   const data = await response.json();
       //   console.log("Response data:", data);
       //   return data;
-      return await fetch(url, options);
+
+      //   return await fetch(url, options);
+      return response;
     } else {
       console.error("Request failed with status:", response.status);
       throw new Error(`Request failed with status: ${response.status}`);

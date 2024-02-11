@@ -17,6 +17,7 @@ export default function AddressForm({ open, onCreate, onCancel }) {
           .then((values) => {
             form.resetFields();
             onCreate(values);
+            console.log("END POST HERE IN MODAL");
           })
           .catch((info) => {
             console.log("Validate Failed:", info);
