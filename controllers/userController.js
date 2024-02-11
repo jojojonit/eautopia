@@ -72,8 +72,8 @@ const login = async (req, res) => {
 };
 
 const updateAddress = async (req, res) => {
-  const userId = req.user._id;
-  console.log("userID", req.user._id);
+  // const userId = req.user._id;
+  // console.log("userID", req.user._id);
   const { id } = req.params;
   const newAddress = req.body;
 
