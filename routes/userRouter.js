@@ -13,7 +13,11 @@ router.delete(
   checkToken,
   userController.deleteAddress
 );
-router.put("/:id/editAddress/:addressId", userController.editAddress);
+router.put(
+  "/:id/editAddress/:addressId",
+  checkToken,
+  userController.editAddress
+);
 
 router.get("/check-token", userController.checkToken);
 

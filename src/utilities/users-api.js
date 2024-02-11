@@ -83,11 +83,12 @@ export async function deleteAddress(userId, addressId) {
 }
 
 export async function editAddress(userId, addressId, addressData) {
-  const res = await fetch(BASE_URL + `/${userId}/editAddress/${addressId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(addressData),
-  });
+  const res = await sendRequest(
+    BASE_URL + `/${userId}/editAddress/${addressId}`,
+    "PUT",
+    addressData
+  );
+
   console.log("Response from backend:", res);
   if (res.ok) {
     const data = await res.json();
