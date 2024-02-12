@@ -2,7 +2,14 @@ import { Button } from "antd";
 import { useState } from "react";
 import { addToCart } from "../../utilities/order-service";
 
-export default function ShopItem({ id, name, description, category, price }) {
+export default function ShopItem({
+  id,
+  name,
+  description,
+  category,
+  price,
+  showDrawer,
+}) {
   const [cart, setCart] = useState([]);
   const handleClick = () => {
     console.log("clicked", id);
@@ -18,6 +25,7 @@ export default function ShopItem({ id, name, description, category, price }) {
     };
     console.log("to add CART", data);
     const newOrderItem = await addToCart(data);
+    showDrawer();
   };
   return (
     <>

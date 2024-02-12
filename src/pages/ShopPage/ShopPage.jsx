@@ -1,6 +1,6 @@
 import ShopItem from "../../components/Shop/ShopItem";
 
-export default function ShopPage({ products, setProducts }) {
+export default function ShopPage({ products, setProducts, showDrawer }) {
   console.log("SHOP", products);
 
   return (
@@ -14,6 +14,7 @@ export default function ShopPage({ products, setProducts }) {
           description={product.description}
           category={product.category}
           price={product.price}
+          showDrawer={showDrawer}
         />
       ))}
     </>

@@ -13,10 +13,13 @@ import ShopPage from "../ShopPage/ShopPage";
 import { getAllProducts } from "../../utilities/product-service";
 import Navbar from "../../components/Navbar/Navbar";
 import CartPage from "../CartPage/CartPage";
+import { Drawer } from "antd";
+import Cart from "../../components/Cart/Cart";
 
 function App() {
   const [user, setUser] = useState(getUser());
   const [admin, setAdmin] = useState(getAdmin());
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
 
@@ -37,9 +40,16 @@ function App() {
       console.error("Error fetching PRODUCTS:", error);
     }
   };
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <>
-      <Navbar user={user} />
+      <Navbar user={user} showDrawer={showDrawer} onClose={onClose} />
       <Routes>
         <Route path="/" element={<Homepage user={user} setUser={setUser} />} />
         <Route
@@ -50,6 +60,7 @@ function App() {
               products={products}
               setProducts={setProducts}
               loading={loading}
+              showDrawer={showDrawer}
             />
           }
         />
@@ -103,6 +114,10 @@ function App() {
           />
         </Routes>
       )}
+
+      <Drawer width={640} closable={false} onClose={onClose} open={open}>
+        <Cart />
+      </Drawer>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function Navbar({ user }) {
+export default function Navbar({ user, showDrawer, onClose }) {
   return (
     <>
       <nav>
@@ -9,7 +9,10 @@ export default function Navbar({ user }) {
         <NavLink to={user ? "/account/user" : "/account/login"}>
           Account
         </NavLink>
-        /<NavLink to="/cart">Cart</NavLink>
+        /
+        <a href="#" onClick={showDrawer}>
+          Cart
+        </a>
       </nav>
     </>
   );
