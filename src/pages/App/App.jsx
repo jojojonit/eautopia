@@ -8,6 +8,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import { useState } from "react";
 import AccountPage from "../AccountPage/AccountPage";
 import CreateProductPage from "../AdminPage/CreateProductPage";
+import ShopPage from "../ShopPage/ShopPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -56,6 +57,7 @@ function App() {
             path="/account/signup"
             element={<SignUpPage setUser={setUser} />}
           />
+          <Route path="/shop" element={<ShopPage setUser={setUser} />} />
         </Routes>
       )}
     </>
