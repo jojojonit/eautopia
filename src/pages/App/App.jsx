@@ -74,6 +74,7 @@ function App() {
               setProducts={setProducts}
               loading={loading}
               showDrawer={showDrawer}
+              loadCart={loadCart}
             />
           }
         />

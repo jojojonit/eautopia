@@ -9,6 +9,7 @@ export default function ShopItem({
   category,
   price,
   showDrawer,
+  loadCart,
 }) {
   const [cart, setCart] = useState([]);
   const handleClick = () => {
@@ -25,6 +26,7 @@ export default function ShopItem({
     };
     console.log("to add CART", data);
     const newOrderItem = await addToCart(data);
+    loadCart();
     showDrawer();
   };
   return (
