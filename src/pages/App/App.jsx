@@ -11,6 +11,7 @@ import CreateProductPage from "../AdminPage/CreateProductPage";
 import ShopPage from "../ShopPage/ShopPage";
 
 import { getAllProducts } from "../../utilities/product-service";
+import Navbar from "../../components/Navbar/Navbar";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -37,6 +38,7 @@ function App() {
   };
   return (
     <>
+      <Navbar user={user} />
       <Routes>
         <Route path="/" element={<Homepage user={user} setUser={setUser} />} />
         <Route
