@@ -46,6 +46,7 @@ function App() {
               setUser={setUser}
               products={products}
               setProducts={setProducts}
+              loading={loading}
             />
           }
         />
@@ -60,12 +61,21 @@ function App() {
                 setAdmin={setAdmin}
                 user={user}
                 setUser={setUser}
+                products={products}
+                setProducts={setProducts}
+                loadProducts={loadProducts}
               />
             }
           />
           <Route
             path="/admin/create"
-            element={<CreateProductPage admin={admin} setAdmin={setAdmin} />}
+            element={
+              <CreateProductPage
+                admin={admin}
+                setAdmin={setAdmin}
+                loadProducts={loadProducts}
+              />
+            }
           />
 
           <Route

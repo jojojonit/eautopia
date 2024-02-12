@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { createProduct } from "../../utilities/product-service";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateProductPage() {
+export default function CreateProductPage({ loadProducts }) {
   const navigate = useNavigate();
   const [items, setItems] = useState(["65c7a08bfc736911bf949631"]);
   const [name, setName] = useState("");
@@ -26,6 +26,7 @@ export default function CreateProductPage() {
   const onFinish = async (values) => {
     const newProduct = await createProduct(values);
     console.log("Received values of form: ", values);
+    loadProducts();
     navigate("/admin");
   };
   return (

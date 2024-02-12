@@ -8,15 +8,24 @@ import { DeleteTwoTone, EditTwoTone, SettingOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-export default function AdminPage({ admin, setAdmin, user, setUser }) {
-  const [loading, setLoading] = useState(true);
+export default function AdminPage({
+  admin,
+  setAdmin,
+  user,
+  setUser,
+  products,
+  setProducts,
+  loadProducts,
+  loading,
+}) {
+  // const [loading, setLoading] = useState(true);
   const [formView, setFormView] = useState(true);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loadProducts();
-  }, [user]);
+  // useEffect(() => {
+  //   loadProducts();
+  // }, [user]);
 
   const handleAdd = () => {
     console.log("add new product");
@@ -34,16 +43,16 @@ export default function AdminPage({ admin, setAdmin, user, setUser }) {
     }
   };
 
-  const loadProducts = async () => {
-    try {
-      const response = await getAllProducts();
-      setProducts(response.products);
-      setLoading(false);
-      console.log("PRODUCTS fetched successfully", products);
-    } catch (error) {
-      console.error("Error fetching PRODUCTS:", error);
-    }
-  };
+  // const loadProducts = async () => {
+  //   try {
+  //     const response = await getAllProducts();
+  //     setProducts(response.products);
+  //     setLoading(false);
+  //     console.log("PRODUCTS fetched successfully", products);
+  //   } catch (error) {
+  //     console.error("Error fetching PRODUCTS:", error);
+  //   }
+  // };
 
   const handleLogOut = () => {
     logOut();
