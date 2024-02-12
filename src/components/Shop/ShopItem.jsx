@@ -1,14 +1,22 @@
 import { Button } from "antd";
+import { useState } from "react";
+import { addToCart } from "../../utilities/order-service";
 
 export default function ShopItem({ id, name, description, category, price }) {
-  console.log("SHOP ITEM", name);
+  const [cart, setCart] = useState([]);
   const handleClick = () => {
     console.log("clicked", id);
   };
 
-  const handleAddToCart = (event) => {
+  const handleAddToCart = async (event) => {
     event.stopPropagation(); // Stop the click event from propagating
-    console.log("add to cart");
+    const data = {
+      product_id: id,
+      name: name,
+      quantity: 1,
+    };
+    console.log("to add CART", data);
+    const newOrderItem = await addToCart(data);
   };
   return (
     <>

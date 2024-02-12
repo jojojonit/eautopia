@@ -12,6 +12,7 @@ import ShopPage from "../ShopPage/ShopPage";
 
 import { getAllProducts } from "../../utilities/product-service";
 import Navbar from "../../components/Navbar/Navbar";
+import CartPage from "../CartPage/CartPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -51,6 +52,11 @@ function App() {
               loading={loading}
             />
           }
+        />
+
+        <Route
+          path="/cart"
+          element={<CartPage user={user} setUser={setUser} />}
         />
       </Routes>
       {user ? (

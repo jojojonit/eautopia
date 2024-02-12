@@ -9,7 +9,7 @@ export default function Navbar({ user }) {
         <NavLink to={user ? "/account/user" : "/account/login"}>
           Account
         </NavLink>
-        /<NavLink to="/shop">Cart</NavLink>
+        /<NavLink to="/cart">Cart</NavLink>
       </nav>
     </>
   );
