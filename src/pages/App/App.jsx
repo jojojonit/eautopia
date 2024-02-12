@@ -16,6 +16,7 @@ import CartPage from "../CartPage/CartPage";
 import { Drawer } from "antd";
 import Cart from "../../components/Cart/Cart";
 import { viewCart } from "../../utilities/order-service";
+import { addToCart } from "../../utilities/order-service";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -54,6 +55,22 @@ function App() {
     }
   };
 
+  console.log("PRODUCTS ON APP", products);
+
+  const handleAddToCart = async (event, product) => {
+    event.stopPropagation(); // Stop the click event from propagating
+    const data = {
+      product_id: product._id,
+      name: product.name,
+      quantity: 1,
+      price: product.price,
+    };
+    console.log("to add CART", data);
+    const newOrderItem = await addToCart(data);
+    loadCart();
+    showDrawer();
+  };
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -75,6 +92,9 @@ function App() {
               loading={loading}
               showDrawer={showDrawer}
               loadCart={loadCart}
+              handleAddToCart={(event, product) =>
+                handleAddToCart(event, product)
+              }
             />
           }
         />

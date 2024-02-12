@@ -10,25 +10,26 @@ export default function ShopItem({
   price,
   showDrawer,
   loadCart,
+  handleAddToCart,
 }) {
   const [cart, setCart] = useState([]);
   const handleClick = () => {
     console.log("clicked", id);
   };
 
-  const handleAddToCart = async (event) => {
-    event.stopPropagation(); // Stop the click event from propagating
-    const data = {
-      product_id: id,
-      name: name,
-      quantity: 1,
-      price: price,
-    };
-    console.log("to add CART", data);
-    const newOrderItem = await addToCart(data);
-    loadCart();
-    showDrawer();
-  };
+  // const handleAddToCart = async (event) => {
+  //   event.stopPropagation(); // Stop the click event from propagating
+  //   const data = {
+  //     product_id: id,
+  //     name: name,
+  //     quantity: 1,
+  //     price: price,
+  //   };
+  //   console.log("to add CART", data);
+  //   const newOrderItem = await addToCart(data);
+  //   loadCart();
+  //   showDrawer();
+  // };
   return (
     <>
       <div onClick={handleClick}>
@@ -42,7 +43,11 @@ export default function ShopItem({
         <h3>{name}</h3>
         <p>{description}</p>
         <p>$ {price}</p>
-        <Button onClick={handleAddToCart}>BUY {name}</Button>
+        <Button
+          onClick={(event) => handleAddToCart(event, { id, name, price })}
+        >
+          BUY {name}
+        </Button>
       </div>
     </>
   );

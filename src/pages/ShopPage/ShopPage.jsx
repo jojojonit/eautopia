@@ -5,6 +5,7 @@ export default function ShopPage({
   setProducts,
   showDrawer,
   loadCart,
+  handleAddToCart,
 }) {
   console.log("SHOP", products);
 
@@ -21,6 +22,7 @@ export default function ShopPage({
           price={product.price}
           showDrawer={showDrawer}
           loadCart={loadCart}
+          handleAddToCart={(event) => handleAddToCart(event, product)}
         />
       ))}
     </>

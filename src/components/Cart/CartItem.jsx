@@ -9,16 +9,16 @@ export default function CartItem({
   name,
   onQuantityChange,
 }) {
-  const [itemQuantity, setItemQuantity] = useState(quantity);
+  //   const [itemQuantity, setItemQuantity] = useState(quantity);
 
   const handleMinus = () => {
-    if (quantity > 1) {
-      onQuantityChange(id, quantity - 1);
-    }
+    // if (quantity > 1) {
+    //   onQuantityChange(id, quantity - 1);
+    // }
   };
 
   const handlePlus = () => {
-    onQuantityChange(id, quantity + 1);
+    // onQuantityChange(id, quantity + 1);
   };
 
   const updatedPrice = quantity * price;
