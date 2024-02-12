@@ -1,9 +1,17 @@
 import { Button } from "antd";
 import CartItem from "./CartItem";
+import { useState } from "react";
 
 export default function Cart({ cart }) {
-  const cartItems = cart.order.items;
-  console.log("CART ITEMS BY USER", cartItems[0]);
+  const [cartItems, setCartItems] = useState(cart.order.items);
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    const updatedCartItems = cartItems.map((item) =>
+      item._id === itemId ? { ...item, quantity: newQuantity } : item
+    );
+
+    setCartItems(updatedCartItems);
+  };
 
   const subtotal = cartItems.reduce((acc, item) => {
     return acc + item.quantity * item.price;
@@ -20,6 +28,7 @@ export default function Cart({ cart }) {
           quantity={item.quantity}
           price={item.price}
           name={item.product_id.name}
+          onQuantityChange={handleQuantityChange}
         />
       ))}
 
