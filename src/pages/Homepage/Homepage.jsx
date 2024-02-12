@@ -51,15 +51,6 @@ export default function Homepage({ user, setUser }) {
           padding: "0 48px",
         }}
       >
-        {/* <Breadcrumb
-          style={{
-            margin: "16px 0",
-          }}
-        >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb> */}
         <div
           style={{
             padding: 24,
@@ -79,13 +70,5 @@ export default function Homepage({ user, setUser }) {
         Ant Design ©{new Date().getFullYear()} Created by Ant UED
       </Footer>
     </Layout>
-
-    // <>
-    //   <h1>Homepage</h1>
-
-    //   <Link to="/account/signup">
-    //     <Button type="primary">signup</Button>
-    //   </Link>
-    // </>
   );
 }
