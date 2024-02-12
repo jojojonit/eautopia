@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../utilities/users-service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginForm({ setUser }) {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ export default function LoginForm({ setUser }) {
           >
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          Or <Link to="/account/signup">register now!</Link>
         </Form.Item>
       </Form>
     </>

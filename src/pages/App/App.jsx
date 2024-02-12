@@ -18,7 +18,7 @@ function App() {
   console.log("admin check", admin);
   return (
     <>
-      <h1>eautopia</h1>
+      {/* <h1>eautopia</h1> */}
 
       <Routes>
         <Route path="/" element={<Homepage user={user} setUser={setUser} />} />

@@ -54,6 +54,7 @@ export default function SignUpForm({ setUser }) {
 
   return (
     <>
+      <h1>Sign Up</h1>
       <Form
         {...formItemLayout}
         name="sign up"
