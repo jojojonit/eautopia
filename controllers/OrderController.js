@@ -37,7 +37,7 @@ const getOrderByUser = async (req, res) => {
 
 const createOrderItemByUser = async (req, res) => {
   try {
-    const { product_id, quantity } = req.body;
+    const { product_id, quantity, price } = req.body;
 
     // Check if there's an existing order for the user
     let order = await Order.findOne({ user_id: req.user._id });
@@ -59,8 +59,9 @@ const createOrderItemByUser = async (req, res) => {
     });
 
     if (orderItem) {
-      // If OrderItem already exists, increase the quantity
+      // If OrderItem already exists, increase the quantity and price
       orderItem.quantity += quantity;
+      orderItem.price += price;
       await orderItem.save();
     } else {
       // If OrderItem doesn't exist, create a new one
@@ -68,6 +69,7 @@ const createOrderItemByUser = async (req, res) => {
         order_id: order._id,
         product_id: product_id,
         quantity: quantity,
+        price: price,
       });
       await orderItem.save();
 

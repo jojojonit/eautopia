@@ -14,6 +14,7 @@ export default function ShopItem({ id, name, description, category, price }) {
       product_id: id,
       name: name,
       quantity: 1,
+      price: price,
     };
     console.log("to add CART", data);
     const newOrderItem = await addToCart(data);
