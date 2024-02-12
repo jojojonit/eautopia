@@ -44,15 +44,6 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// const deleteProduct = async (req, res) => {
-//   const data = req.body;
-//   try {
-//     const product = await Product.deleteOne(data);
-//     res.status(200).json({ message: "Product DELETED successfullt", product });
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
