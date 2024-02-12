@@ -15,6 +15,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import CartPage from "../CartPage/CartPage";
 import { Drawer } from "antd";
 import Cart from "../../components/Cart/Cart";
+import { viewCart } from "../../utilities/order-service";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -22,12 +23,14 @@ function App() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   console.log("user check", user);
   console.log("admin check", admin);
 
   useEffect(() => {
     loadProducts();
+    loadCart();
   }, [user]);
 
   const loadProducts = async () => {
@@ -38,6 +41,16 @@ function App() {
       console.log("PRODUCTS fetched successfully", products);
     } catch (error) {
       console.error("Error fetching PRODUCTS:", error);
+    }
+  };
+
+  const loadCart = async () => {
+    try {
+      const response = await viewCart();
+      setCart(response);
+      console.log("CART fetched successfully", cart);
+    } catch (error) {
+      console.error("Error fetching CART:", error);
     }
   };
 
@@ -116,7 +129,7 @@ function App() {
       )}
 
       <Drawer width={640} closable={false} onClose={onClose} open={open}>
-        <Cart />
+        <Cart cart={cart} />
       </Drawer>
     </>
   );

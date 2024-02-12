@@ -14,7 +14,13 @@ const getAll = async (req, res) => {
 const getOrderByUser = async (req, res) => {
   const user_id = req.user._id;
   try {
-    const order = await Order.findOne({ user_id });
+    const order = await Order.findOne({ user_id }).populate({
+      path: "items",
+      populate: [
+        { path: "product_id", model: "Product" },
+        { path: "order_id", model: "Order" },
+      ],
+    });
     res.status(200).json({ order });
   } catch (error) {
     res.status(500).json({ error });
