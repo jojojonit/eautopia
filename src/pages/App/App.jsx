@@ -18,6 +18,7 @@ import Cart from "../../components/Cart/Cart";
 import { viewCart } from "../../utilities/order-service";
 import { addToCart } from "../../utilities/order-service";
 import SingleProductPage from "../ShopPage/SingleProductPage";
+import CheckoutPage from "../CheckoutPage/CheckoutPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -111,9 +112,10 @@ function App() {
           }
         />
 
+        <Route path="/cart" element={<CartPage />} />
         <Route
-          path="/cart"
-          element={<CartPage user={user} setUser={setUser} />}
+          path="/checkout"
+          element={<CheckoutPage user={user} setUser={setUser} />}
         />
       </Routes>
       {user ? (
@@ -162,7 +164,7 @@ function App() {
       )}
 
       <Drawer width={640} closable={false} onClose={onClose} open={open}>
-        <Cart cart={cart} loadCart={loadCart} />
+        <Cart cart={cart} loadCart={loadCart} onClose={() => setOpen(false)} />
       </Drawer>
     </>
   );

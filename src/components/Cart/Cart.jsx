@@ -1,11 +1,19 @@
 import { Button } from "antd";
 import CartItem from "./CartItem";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Cart({ cart, loadCart }) {
+export default function Cart({ cart, loadCart, onClose }) {
+  const navigate = useNavigate();
+
   const cartItems = (cart && cart.order && cart.order.items) || [];
   const subtotal = cartItems.reduce((acc, item) => {
     return acc + item.quantity * item.price;
   }, 0);
+
+  const navigateCheckOut = () => {
+    onClose();
+    navigate("/checkout");
+  };
   return (
     <>
       <h1>Cart</h1>
@@ -28,7 +36,8 @@ export default function Cart({ cart, loadCart }) {
       <b>subtotal: ${subtotal}</b>
       <br />
       <br />
-      <Button>Continue To Checkout</Button>
+
+      <Button onClick={navigateCheckOut}>Continue To Checkout</Button>
     </>
   );
 }
