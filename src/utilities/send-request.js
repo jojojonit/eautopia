@@ -17,6 +17,8 @@ export default async function sendRequest(url, method = "GET", payload = null) {
     options.headers.Authorization = `Bearer ${token}`;
   }
 
+  //? logic to handle guest user
+
   console.log("Sending request to:", url);
   console.log("Request options:", options);
 
@@ -26,11 +28,6 @@ export default async function sendRequest(url, method = "GET", payload = null) {
     console.log("Response status:", response.status);
 
     if (response.ok) {
-      //   const data = await response.json();
-      //   console.log("Response data:", data);
-      //   return data;
-
-      //   return await fetch(url, options);
       return response;
     } else {
       console.error("Request failed with status:", response.status);
