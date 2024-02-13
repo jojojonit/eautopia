@@ -44,3 +44,17 @@ export async function updateCart(id, newQuantity) {
     return null;
   }
 }
+
+export async function deleteCartItem(id) {
+  try {
+    const res = await sendRequest(BASE_URL + "/deletecartitem", "DELETE", id);
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res;
+    }
+  } catch (error) {
+    console.error("Error DELETING CART ITEM:", error);
+    return null;
+  }
+}

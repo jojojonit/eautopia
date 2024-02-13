@@ -98,9 +98,37 @@ const updateOrderItemByUser = async (req, res) => {
   }
 };
 
+const deleteOrderItemByUser = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    const orderItem = await OrderItem.findByIdAndDelete(id);
+
+    if (!orderItem) {
+      return res.status(404).json({ error: "ORDER ITEM not found" });
+    }
+
+    // Find the associated Order and remove the orderItem from its items array
+    const order = await Order.findOneAndUpdate(
+      { _id: orderItem.order_id },
+      { $pull: { items: id } },
+      { new: true }
+    );
+
+    res.json({
+      message: "ORDER ITEM deleted successfully",
+      deletedOrderItem: orderItem,
+    });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   getAll,
   getOrderByUser,
   createOrderItemByUser,
   updateOrderItemByUser,
+  deleteOrderItemByUser,
 };

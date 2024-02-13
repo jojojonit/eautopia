@@ -1,5 +1,9 @@
-import { MinusCircleTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
-import { updateCart } from "../../utilities/order-service";
+import {
+  CloseCircleTwoTone,
+  MinusCircleTwoTone,
+  PlusCircleTwoTone,
+} from "@ant-design/icons";
+import { deleteCartItem, updateCart } from "../../utilities/order-service";
 
 export default function CartItem({ id, quantity, price, name, loadCart }) {
   const handleMinus = async () => {
@@ -21,6 +25,16 @@ export default function CartItem({ id, quantity, price, name, loadCart }) {
     loadCart();
   };
 
+  const handleRemove = async () => {
+    console.log("remove item", id);
+    try {
+      const removeOrderItem = await deleteCartItem({ id });
+      console.log("REMOVED SUCCESSFULLY", removeOrderItem);
+    } catch (error) {
+      console.error("Error DELETING order item:", error);
+    }
+    loadCart();
+  };
   const updatedPrice = quantity * price;
 
   return (
@@ -38,6 +52,9 @@ export default function CartItem({ id, quantity, price, name, loadCart }) {
         <PlusCircleTwoTone twoToneColor="#eb2f96" onClick={handlePlus} />
       </span>
       <p>$ {updatedPrice}</p>
+      <CloseCircleTwoTone twoToneColor="#eb2f96" onClick={handleRemove} />
+      <br />
+      <br />
     </>
   );
 }
