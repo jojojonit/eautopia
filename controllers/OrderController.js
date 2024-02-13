@@ -32,7 +32,7 @@ const find = async (req, res) => {
 const getOrderByUser = async (req, res) => {
   const user_id = req.user._id;
   try {
-    const order = await Order.findOne({ user_id }).populate({
+    const order = await Order.findOne({ user_id, completed: false }).populate({
       path: "items",
       populate: [
         { path: "product_id", model: "Product" },
@@ -50,7 +50,10 @@ const createOrderItemByUser = async (req, res) => {
     const { product_id, quantity, price } = req.body;
 
     // Check if there's an existing order for the user
-    let order = await Order.findOne({ user_id: req.user._id });
+    let order = await Order.findOne({
+      user_id: req.user._id,
+      completed: false,
+    });
 
     // If there's no existing order, create a new one
     if (!order) {
@@ -217,6 +220,18 @@ const checkout = async (req, res) => {
     success_url: "http://localhost:5173/success",
     cancel_url: "http://localhost:5173/cancel",
   });
+
+  // Update the order status in your database
+  // Assuming you have a model named Order
+
+  // Extract order IDs from products
+  const orderIds = products.map((product) => product.order_id);
+
+  // Update the completed field of the orders in the database
+  await Order.updateMany(
+    { _id: { $in: orderIds } },
+    { $set: { completed: true } }
+  );
   res.json({ id: session.id });
 };
 
