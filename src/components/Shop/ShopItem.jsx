@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { useState } from "react";
 import { addToCart } from "../../utilities/order-service";
+import { useNavigate } from "react-router-dom";
 
 export default function ShopItem({
   id,
@@ -8,12 +9,12 @@ export default function ShopItem({
   description,
   category,
   price,
-  showDrawer,
-  loadCart,
   handleAddToCart,
 }) {
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
   const handleClick = () => {
+    navigate(`/shop/${id}`);
     console.log("clicked", id);
   };
 

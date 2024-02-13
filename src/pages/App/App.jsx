@@ -101,7 +101,14 @@ function App() {
         />
         <Route
           path="/shop/:id"
-          element={<SingleProductPage products={products} />}
+          element={
+            <SingleProductPage
+              products={products}
+              handleAddToCart={(event, product) =>
+                handleAddToCart(event, product)
+              }
+            />
+          }
         />
 
         <Route
