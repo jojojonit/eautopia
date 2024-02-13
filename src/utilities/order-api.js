@@ -1,6 +1,33 @@
 import sendRequest from "./send-request";
 const BASE_URL = "/api/order";
 
+export async function getCart() {
+  const res = await fetch(BASE_URL, {
+    headers: { "Content-Type": "application/json" },
+  });
+  if (res.ok) {
+    return res.json();
+  } else {
+    return res;
+  }
+}
+
+export async function guestAddToCart(orderItem) {
+  const res = await fetch(BASE_URL + "/guestaddtocart", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderItem),
+  });
+  console.log("Response from backend:", res);
+  if (res.ok) {
+    console.log("PRODUCT GUEST added successfully");
+    return res.json();
+  } else {
+    console.log("Error in adding address");
+    throw new Error("Invalid (addAddress)");
+  }
+}
+
 export async function viewCart() {
   const res = await sendRequest(BASE_URL + "/viewcart", "GET");
   if (res.ok) {

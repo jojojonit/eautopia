@@ -5,6 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Cart({ cart, loadCart, onClose }) {
   const navigate = useNavigate();
 
+  // const cartItems = cart.orders
+  //   ? cart.orders.flatMap((order) => order.items || []) // Flattening items from each order
+  //   : [];
+
+  // const subtotal = cartItems.reduce((acc, item) => {
+  //   return acc + item.quantity * item.price;
+  // }, 0);
+  // console.log("CART ITEMS", cartItems);
   const cartItems = (cart && cart.order && cart.order.items) || [];
   const subtotal = cartItems.reduce((acc, item) => {
     return acc + item.quantity * item.price;

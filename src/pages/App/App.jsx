@@ -15,7 +15,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import CartPage from "../CartPage/CartPage";
 import { Drawer } from "antd";
 import Cart from "../../components/Cart/Cart";
-import { viewCart } from "../../utilities/order-service";
+import { getCart, viewCart } from "../../utilities/order-service";
 import { addToCart } from "../../utilities/order-service";
 import SingleProductPage from "../ShopPage/SingleProductPage";
 import CheckoutPage from "../CheckoutPage/CheckoutPage";
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     loadProducts();
     loadCart();
-  }, [user]);
+  }, []);
 
   const loadProducts = async () => {
     try {
@@ -49,15 +49,20 @@ function App() {
 
   const loadCart = async () => {
     try {
+      // if (user) {
       const response = await viewCart();
       setCart(response);
+      // } else {
+      //   const response = await getCart();
+      //   setCart(response);
+      // }
       console.log("CART fetched successfully", cart);
     } catch (error) {
       console.error("Error fetching CART:", error);
     }
   };
 
-  console.log("PRODUCTS ON APP", products);
+  console.log("CART ON APP", cart);
 
   const handleAddToCart = async (event, product) => {
     event.stopPropagation(); // Stop the click event from propagating
@@ -68,7 +73,9 @@ function App() {
       price: product.price,
     };
     console.log("to add CART", data);
+
     const newOrderItem = await addToCart(data);
+
     loadCart();
     showDrawer();
   };

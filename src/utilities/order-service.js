@@ -1,5 +1,15 @@
 import * as ordersAPI from "./order-api";
 
+export async function getCart() {
+  const response = await ordersAPI.getCart();
+  return response;
+}
+
+export async function guestAddToCart(orderItem) {
+  const response = await ordersAPI.guestAddToCart(orderItem);
+  return response;
+}
+
 export async function viewCart() {
   const response = await ordersAPI.viewCart();
   return response;
