@@ -19,6 +19,8 @@ import { getCart, viewCart } from "../../utilities/order-service";
 import { addToCart } from "../../utilities/order-service";
 import SingleProductPage from "../ShopPage/SingleProductPage";
 import CheckoutPage from "../CheckoutPage/CheckoutPage";
+import Success from "../CheckoutPage/Success";
+import Cancel from "../CheckoutPage/Cancel";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -49,13 +51,8 @@ function App() {
 
   const loadCart = async () => {
     try {
-      // if (user) {
       const response = await viewCart();
       setCart(response);
-      // } else {
-      //   const response = await getCart();
-      //   setCart(response);
-      // }
       console.log("CART fetched successfully", cart);
     } catch (error) {
       console.error("Error fetching CART:", error);
@@ -119,10 +116,19 @@ function App() {
           }
         />
 
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+
         <Route
           path="/checkout"
-          element={<CheckoutPage user={user} setUser={setUser} />}
+          element={
+            <CheckoutPage
+              user={user}
+              setUser={setUser}
+              cart={cart}
+              loadCart={loadCart}
+            />
+          }
         />
       </Routes>
       {user ? (

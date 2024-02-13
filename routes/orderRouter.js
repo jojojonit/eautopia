@@ -18,4 +18,6 @@ router.delete(
   orderController.deleteOrderItemByUser
 );
 
+router.post("/checkout", checkToken, orderController.checkout);
+
 module.exports = router;

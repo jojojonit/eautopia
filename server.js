@@ -8,6 +8,8 @@ const categoryRouter = require("./routes/categoryRouter");
 const orderRouter = require("./routes/orderRouter");
 // const logger = require("morgan");
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
 const server = express();
 
 //middleware block

@@ -2,6 +2,8 @@ const Order = require("../models/Order.js");
 const OrderItem = require("../models/OrderItem.js");
 const Product = require("../models/Product.js");
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
 const getAll = async (req, res) => {
   try {
     const orders = await Order.find().populate({
@@ -195,6 +197,29 @@ const deleteOrderItemByUser = async (req, res) => {
   }
 };
 
+const checkout = async (req, res) => {
+  const { products } = req.body;
+  const lineItems = products.map((product) => ({
+    price_data: {
+      currency: "sgd",
+      product_data: {
+        name: product.product_id.name,
+      },
+      unit_amount: product.price * 100,
+    },
+    quantity: product.quantity,
+  }));
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: lineItems,
+    mode: "payment",
+    success_url: "http://localhost:5173/success",
+    cancel_url: "http://localhost:5173/cancel",
+  });
+  res.json({ id: session.id });
+};
+
 module.exports = {
   getAll,
   find,
@@ -203,4 +228,5 @@ module.exports = {
   createOrderItemByUser,
   updateOrderItemByUser,
   deleteOrderItemByUser,
+  checkout,
 };

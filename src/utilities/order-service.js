@@ -29,3 +29,8 @@ export async function deleteCartItem(id) {
   const response = await ordersAPI.deleteCartItem(id);
   return response;
 }
+
+export async function checkout(body) {
+  const response = await ordersAPI.checkout(body);
+  return response;
+}

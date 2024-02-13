@@ -1,5 +1,6 @@
 import sendRequest from "./send-request";
 const BASE_URL = "/api/order";
+import { loadStripe } from "@stripe/stripe-js";
 
 export async function getCart() {
   const res = await fetch(BASE_URL, {
@@ -82,6 +83,25 @@ export async function deleteCartItem(id) {
     }
   } catch (error) {
     console.error("Error DELETING CART ITEM:", error);
+    return null;
+  }
+}
+
+export async function checkout(body) {
+  const stripe = await loadStripe(
+    "pk_test_51OjHKnGYuvtojAdweu3LmIkjNOOBKQfaFtbVpp3xcimvd2dmMpTpdzTsB6i8XHJGI3yNQEITv3EoBJZRax7CEfJH009Q2kx0S3"
+  );
+  try {
+    const res = await sendRequest(BASE_URL + "/checkout", "POST", body);
+    const session = await res.json();
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    if (result.error) {
+      console.log(result.error);
+    }
+  } catch (error) {
+    console.error("Error CHECKOUT:", error);
     return null;
   }
 }

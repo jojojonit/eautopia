@@ -1,6 +1,8 @@
 import { Button } from "antd";
 import CartItem from "./CartItem";
 import { Link, useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { checkout } from "../../utilities/order-service";
 
 export default function Cart({ cart, loadCart, onClose }) {
   const navigate = useNavigate();
@@ -14,13 +16,23 @@ export default function Cart({ cart, loadCart, onClose }) {
   // }, 0);
   // console.log("CART ITEMS", cartItems);
   const cartItems = (cart && cart.order && cart.order.items) || [];
+
+  console.log("CART CHECKOUT", cartItems);
   const subtotal = cartItems.reduce((acc, item) => {
     return acc + item.quantity * item.price;
   }, 0);
 
-  const navigateCheckOut = () => {
-    onClose();
-    navigate("/checkout");
+  const handleCheckOut = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51OjHKnGYuvtojAdweu3LmIkjNOOBKQfaFtbVpp3xcimvd2dmMpTpdzTsB6i8XHJGI3yNQEITv3EoBJZRax7CEfJH009Q2kx0S3"
+    );
+    const body = {
+      products: cartItems,
+    };
+
+    const response = await checkout(body);
+    // onClose();
+    // navigate("/checkout");
   };
   return (
     <>
@@ -45,7 +57,7 @@ export default function Cart({ cart, loadCart, onClose }) {
       <br />
       <br />
 
-      <Button onClick={navigateCheckOut}>Continue To Checkout</Button>
+      <Button onClick={handleCheckOut}>Continue To Checkout</Button>
     </>
   );
 }
