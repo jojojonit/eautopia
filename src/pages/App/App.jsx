@@ -17,6 +17,7 @@ import { Drawer } from "antd";
 import Cart from "../../components/Cart/Cart";
 import { viewCart } from "../../utilities/order-service";
 import { addToCart } from "../../utilities/order-service";
+import SingleProductPage from "../ShopPage/SingleProductPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -97,6 +98,10 @@ function App() {
               }
             />
           }
+        />
+        <Route
+          path="/shop/:id"
+          element={<SingleProductPage products={products} />}
         />
 
         <Route

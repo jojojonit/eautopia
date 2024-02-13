@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function Navbar({ user, showDrawer, onClose }) {
+export default function Navbar({ user, showDrawer }) {
   return (
     <>
       <nav>
