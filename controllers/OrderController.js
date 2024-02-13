@@ -27,20 +27,6 @@ const getOrderByUser = async (req, res) => {
   }
 };
 
-//? testing out async creating order item them add to order, if no order, create new order
-// const createOrderByUser = async (req, res) => {
-//   const user_id = req.user._id;
-//   const { product_id, quantity } = req.body;
-//   try {
-//     const order = await Order.findOne({user_id})
-//     const product = await Product.findOne({_id: product_id})
-//     if (!product) {
-//         res.status(404).json({msg: "product not found"})
-//         return
-//     }
-//   }
-// };
-
 const createOrderItemByUser = async (req, res) => {
   try {
     const { product_id, quantity, price } = req.body;
@@ -91,8 +77,30 @@ const createOrderItemByUser = async (req, res) => {
     res.status(500).json({ error: "OrderItem failed to create" });
   }
 };
+
+const updateOrderItemByUser = async (req, res) => {
+  const { id, newQuantity } = req.body;
+  try {
+    const orderItem = await OrderItem.findById(id);
+    if (!orderItem) {
+      return res.status(404).json({ error: "ORDER ITEM not found" });
+    }
+    orderItem.quantity = newQuantity;
+    res.status(200).json({
+      message: "ORDER ITEM updated successfully",
+      orderItem,
+      newQuantity,
+    });
+    await orderItem.save();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to update order item quantity" });
+  }
+};
+
 module.exports = {
   getAll,
   getOrderByUser,
   createOrderItemByUser,
+  updateOrderItemByUser,
 };

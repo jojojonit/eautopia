@@ -1,24 +1,24 @@
 import { MinusCircleTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
-import { useState } from "react";
+import { updateCart } from "../../utilities/order-service";
 
-export default function CartItem({
-  key,
-  id,
-  quantity,
-  price,
-  name,
-  onQuantityChange,
-}) {
-  //   const [itemQuantity, setItemQuantity] = useState(quantity);
-
-  const handleMinus = () => {
-    // if (quantity > 1) {
-    //   onQuantityChange(id, quantity - 1);
-    // }
+export default function CartItem({ id, quantity, price, name, loadCart }) {
+  const handleMinus = async () => {
+    const newQuantity = quantity > 1 ? quantity - 1 : quantity;
+    const updatedOrderItem = await updateCart({ id, newQuantity });
+    console.log("UPDATED SUCCESSFULLY", updatedOrderItem);
+    loadCart();
   };
 
-  const handlePlus = () => {
-    // onQuantityChange(id, quantity + 1);
+  const handlePlus = async () => {
+    const newQuantity = quantity + 1;
+    console.log("HANDLE PLUS", newQuantity);
+    try {
+      const updatedOrderItem = await updateCart({ id, newQuantity });
+      console.log("UPDATED SUCCESSFULLY", updatedOrderItem);
+    } catch (error) {
+      console.error("Error updating order item:", error);
+    }
+    loadCart();
   };
 
   const updatedPrice = quantity * price;

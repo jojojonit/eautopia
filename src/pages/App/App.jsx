@@ -150,7 +150,7 @@ function App() {
       )}
 
       <Drawer width={640} closable={false} onClose={onClose} open={open}>
-        <Cart cart={cart} />
+        <Cart cart={cart} loadCart={loadCart} />
       </Drawer>
     </>
   );

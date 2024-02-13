@@ -89,7 +89,7 @@ const updateAddress = async (req, res) => {
 
     res.json({ msg: "Address added successfully", newAddress, user });
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
 
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -109,7 +109,7 @@ const getAddresses = async (req, res) => {
 
     res.json({ msg: "ADDRESS FETCHED SUCCESS", addresses });
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
 
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -130,7 +130,7 @@ const deleteAddress = async (req, res) => {
 
     res.json({ message: "Address deleted successfully", user });
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
 
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -159,7 +159,7 @@ const editAddress = async (req, res) => {
 
     res.json({ message: "Address EDITED successfully", newAddress, user });
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
 
     res.status(500).json({ error: "Internal Server Error" });
   }

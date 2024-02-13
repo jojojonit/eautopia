@@ -9,3 +9,8 @@ export async function addToCart(orderItem) {
   const response = await ordersAPI.addToCart(orderItem);
   return response;
 }
+
+export async function updateCart(id, newQuantity) {
+  const response = await ordersAPI.updateCart(id, newQuantity);
+  return response;
+}

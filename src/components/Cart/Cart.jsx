@@ -1,8 +1,7 @@
 import { Button } from "antd";
 import CartItem from "./CartItem";
-import { useState } from "react";
 
-export default function Cart({ cart }) {
+export default function Cart({ cart, loadCart }) {
   //   const [cartItems, setCartItems] = useState(cart.order.items);
 
   //   const handleQuantityChange = (itemId, newQuantity) => {
@@ -34,7 +33,7 @@ export default function Cart({ cart }) {
           quantity={item.quantity}
           price={item.price}
           name={item.product_id.name}
-          //   onQuantityChange={handleQuantityChange}
+          loadCart={loadCart}
         />
       ))}
 

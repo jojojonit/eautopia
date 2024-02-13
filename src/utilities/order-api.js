@@ -25,3 +25,22 @@ export async function addToCart(orderItem) {
     return null;
   }
 }
+
+export async function updateCart(id, newQuantity) {
+  try {
+    const res = await sendRequest(
+      BASE_URL + "/updatecart",
+      "PATCH",
+      id,
+      newQuantity
+    );
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res;
+    }
+  } catch (error) {
+    console.error("Error ADDING TO CART:", error);
+    return null;
+  }
+}
