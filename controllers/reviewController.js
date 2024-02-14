@@ -30,10 +30,9 @@ const createReview = async (req, res) => {
 };
 
 const createReviewByUser = async (req, res) => {
-  const { _id } = req.user;
   const data = req.body;
   try {
-    const review = await Review.create({ user_id: _id, ...data });
+    const review = await Review.create(data);
     res.status(200).json({ review });
   } catch (error) {
     res.status(500).json({ error });

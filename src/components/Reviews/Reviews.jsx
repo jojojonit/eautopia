@@ -1,11 +1,7 @@
 import { Collapse, theme } from "antd";
 import ReviewsItem from "./ReviewsItem";
 import ReviewForm from "./ReviewForm";
-import {
-  CaretRightOutlined,
-  MinusCircleTwoTone,
-  PlusCircleTwoTone,
-} from "@ant-design/icons";
+import { MinusCircleTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
 
 // const getItems = (panelStyle) => [
 //   {
@@ -17,7 +13,7 @@ import {
 //   },
 // ];
 
-export default function Reviews({ review, product }) {
+export default function Reviews({ review, product, user, loadReviews }) {
   const reviews = review?.reviews || []; // Ensure that review.reviews is an array
   console.log("REVIEW COMPONENT", review.reviews);
 
@@ -27,7 +23,9 @@ export default function Reviews({ review, product }) {
     {
       key: "1",
       label: "ADD A REVIEW",
-      children: <ReviewForm product={product} />,
+      children: (
+        <ReviewForm product={product} user={user} loadReviews={loadReviews} />
+      ),
       // showArrow: false,
       style: panelStyle,
     },

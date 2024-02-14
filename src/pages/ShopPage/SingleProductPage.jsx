@@ -4,17 +4,17 @@ import Reviews from "../../components/Reviews/Reviews";
 import { getReviewsByProduct } from "../../utilities/review-service";
 import { useEffect, useState } from "react";
 
-export default function SingleProductPage({ products, handleAddToCart }) {
+export default function SingleProductPage({ user, products, handleAddToCart }) {
   const { id } = useParams();
   const [review, setReview] = useState([]);
   const product = products.find((product) => product._id === id);
   console.log("PRODUCT SINGLE", product);
 
   useEffect(() => {
-    loadReview();
+    loadReviews();
   }, []);
 
-  const loadReview = async () => {
+  const loadReviews = async () => {
     try {
       const response = await getReviewsByProduct(product._id);
       console.log("REVIEWS fetched successfully", response);
@@ -34,7 +34,12 @@ export default function SingleProductPage({ products, handleAddToCart }) {
         BUY {product.name}
       </Button>
 
-      <Reviews review={review} product={product} />
+      <Reviews
+        review={review}
+        product={product}
+        user={user}
+        loadReviews={loadReviews}
+      />
     </>
   );
 }

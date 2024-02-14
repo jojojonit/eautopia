@@ -1,23 +1,35 @@
-import { HeartFilled, HeartTwoTone } from "@ant-design/icons";
+import { HeartFilled } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Rate, Space } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
+import { createReview } from "../../utilities/review-service";
 
-export default function ReviewForm({ product }) {
+export default function ReviewForm({ user, product, loadReviews }) {
   const [rating, setRating] = useState(3);
 
-  console.log("FINDING PRODUCT");
+  console.log("FINDING PRODUCT", user);
 
-  const onFinish = (values) => {
-    const currentDate = new Date().toLocaleDateString(); // Get current date in local format
-
-    const data = {
+  const onFinish = async (values) => {
+    const currentDate = new Date().toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    const reviewData = {
       ...values,
       rating,
       date: currentDate,
       product_id: product._id,
+      user_id: user._id,
     };
-    console.log("Received values of REVIEW", data);
+    console.log("Received values of REVIEW", reviewData);
+    try {
+      const newReview = await createReview(reviewData);
+      console.log("REVIEW created successfully", newReview);
+      loadReviews();
+    } catch (error) {
+      console.error("Error creating review:", error);
+    }
   };
   return (
     <Form name="review-form" variant="filled" onFinish={onFinish}>

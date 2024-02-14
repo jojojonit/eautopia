@@ -110,13 +110,14 @@ function App() {
           element={
             <SingleProductPage
               products={products}
+              user={user}
               handleAddToCart={(event, product) =>
                 handleAddToCart(event, product)
               }
             />
           }
         />
-<Route path="/about" element={<AboutPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
 
