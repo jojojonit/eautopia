@@ -5,23 +5,16 @@ import TextArea from "antd/es/input/TextArea";
 import { useRef, useState } from "react";
 import { createProduct } from "../../utilities/product-service";
 import { useNavigate } from "react-router-dom";
-import {
-  createCategory,
-  getCategories,
-} from "../../utilities/category-service";
-import { useEffect } from "react";
+import { createCategory } from "../../utilities/category-service";
 
 export default function CreateProductPage({ loadProducts, user, category }) {
   const navigate = useNavigate();
   const [items, setItems] = useState(["hello"]);
+
   const [name, setName] = useState("");
   const inputRef = useRef(null);
 
   const categories = category.category;
-
-  // useEffect(() => {
-  //   loadCategories();
-  // }, [user]);
 
   console.log("CATS", categories);
 
@@ -44,8 +37,8 @@ export default function CreateProductPage({ loadProducts, user, category }) {
   };
 
   const onFinish = async (values) => {
-    const newProduct = await createProduct(values);
     console.log("Received values of form: ", values);
+    const newProduct = await createProduct(values);
     loadProducts();
     navigate("/admin");
   };
@@ -155,6 +148,28 @@ export default function CreateProductPage({ loadProducts, user, category }) {
           Submit
         </Button>
       </Form>
+
+      {/* // <h1>Notes</h1>
+          // <Form name="create_notes" layout="vertical" onFinish={onFinishNotes}>
+          //   <Form.Item name="head">
+          //     <Input prefix="HEAD" />
+          //   </Form.Item>
+
+          //   <Form.Item name="heart">
+          //     <Input prefix="HEART" />
+          //   </Form.Item>
+
+          //   <Form.Item name="base">
+          //     <Input prefix="BASE" />
+          //   </Form.Item>
+
+          //   <Button type="primary" htmlType="submit">
+          //     Submit
+          //   </Button>
+          // </Form> */}
+
+      <br />
+      <br />
       <Button onClick={() => navigate(-1)}>back</Button>
     </>
   );

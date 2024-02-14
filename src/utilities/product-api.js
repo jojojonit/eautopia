@@ -57,3 +57,21 @@ export async function updateProduct(id, productData) {
     return null;
   }
 }
+
+export async function addNotes(id, notesData) {
+  try {
+    const res = await sendRequest(
+      BASE_URL + `/${id}/addnotes`,
+      "POST",
+      notesData
+    );
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res;
+    }
+  } catch (error) {
+    console.error("Error adding notes:", error);
+    return null;
+  }
+}

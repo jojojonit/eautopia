@@ -19,3 +19,8 @@ export async function updateProduct(id, productData) {
   const response = await productsAPI.updateProduct(id, productData);
   return response;
 }
+
+export async function addNotes(id, notesData) {
+  const response = await productsAPI.addNotes(id, notesData);
+  return response;
+}
