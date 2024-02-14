@@ -20,32 +20,6 @@ export default function Homepage({ user, setUser }) {
 
   return (
     <Layout>
-      <Header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1,
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={items}
-          style={{
-            flex: 1,
-            minWidth: 0,
-          }}
-        />
-
-        <Link to={user ? "/account/user" : "/account/login"}>
-          <Button type="primary">Account</Button>
-        </Link>
-      </Header>
       <Content
         style={{
           padding: "0 48px",
