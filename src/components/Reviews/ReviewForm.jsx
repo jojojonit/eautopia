@@ -3,9 +3,14 @@ import { Button, Flex, Form, Input, Rate, Space } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 import { createReview } from "../../utilities/review-service";
+import { Link } from "react-router-dom";
 
 export default function ReviewForm({ user, product, loadReviews }) {
   const [rating, setRating] = useState(3);
+
+  // Set disabled status based on the availability of the user
+  const isUserAvailable = !!user;
+  const [componentDisabled, setComponentDisabled] = useState(!isUserAvailable);
 
   console.log("FINDING PRODUCT", user);
 
@@ -32,31 +37,43 @@ export default function ReviewForm({ user, product, loadReviews }) {
     }
   };
   return (
-    <Form name="review-form" variant="filled" onFinish={onFinish}>
-      <Form.Item label="Title" name="title">
-        <Input />
-      </Form.Item>
+    <>
+      {!isUserAvailable && (
+        <p>
+          Please <Link to="/account/login">login</Link> to leave a review.
+        </p>
+      )}
+      <Form
+        name="review-form"
+        variant="filled"
+        onFinish={onFinish}
+        disabled={componentDisabled}
+      >
+        <Form.Item label="Title" name="title">
+          <Input />
+        </Form.Item>
 
-      <Form.Item label="Rate" name="rating">
-        <Flex vertical gap="middle">
-          <Rate
-            character={<HeartFilled />}
-            style={{ color: "#eb2f96" }}
-            onChange={setRating}
-            value={rating}
-          />
-        </Flex>
-      </Form.Item>
+        <Form.Item label="Rate" name="rating">
+          <Flex vertical gap="middle">
+            <Rate
+              character={<HeartFilled />}
+              style={{ color: "#eb2f96" }}
+              onChange={setRating}
+              value={rating}
+            />
+          </Flex>
+        </Form.Item>
 
-      <Form.Item label="Body" name="body">
-        <TextArea />
-      </Form.Item>
+        <Form.Item label="Body" name="body">
+          <TextArea />
+        </Form.Item>
 
-      <Form.Item>
-        <Space>
-          <Button htmlType="submit">submit</Button>
-        </Space>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Space>
+            <Button htmlType="submit">submit</Button>
+          </Space>
+        </Form.Item>
+      </Form>
+    </>
   );
 }

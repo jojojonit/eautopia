@@ -73,13 +73,13 @@ export default function Reviews({ review, product, user, loadReviews }) {
       sortedReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
       break;
   }
+
   return (
     <>
       <h2>Reviews</h2>
       <Collapse
         items={getItems(panelStyle)}
         bordered={false}
-        defaultActiveKey={["1"]}
         expandIcon={({ isActive }) =>
           isActive ? (
             <MinusCircleTwoTone twoToneColor="#eb2f96" />
