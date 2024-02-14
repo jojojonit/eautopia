@@ -9,7 +9,12 @@ router.get("/", productController.getAll);
 
 //admin routes
 router.post("/create", checkToken, checkAdmin, productController.createProduct);
-router.patch("/:id/update", productController.updateProduct);
+router.patch(
+  "/:id/update",
+  checkToken,
+  checkAdmin,
+  productController.updateProduct
+);
 router.delete(
   "/:id/delete",
   checkToken,

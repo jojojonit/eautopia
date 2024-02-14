@@ -1,7 +1,11 @@
-import { Button, Card, Skeleton } from "antd";
+import { Button, Card, InputNumber, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteProduct, getAllProducts } from "../../utilities/product-service";
+import {
+  deleteProduct,
+  getAllProducts,
+  updateProduct,
+} from "../../utilities/product-service";
 import { logOut } from "../../utilities/users-service";
 
 import { DeleteTwoTone, EditTwoTone, SettingOutlined } from "@ant-design/icons";
@@ -49,6 +53,30 @@ export default function AdminPage({
   //   }
   // };
 
+  const handlePriceChange = async (id, value) => {
+    console.log("price clicked", id, value);
+
+    try {
+      const response = await updateProduct(id, { price: value });
+      // loadProducts();
+      console.log("updated successfully", id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnitChange = async (id, value) => {
+    console.log("unit clicked", id, value);
+
+    try {
+      const response = await updateProduct(id, { stock: value });
+      // loadProducts();
+      console.log("updated successfully", id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleLogOut = () => {
     logOut();
     navigate("/");
@@ -86,8 +114,22 @@ export default function AdminPage({
 
           <p>Description: {product.description}</p>
           <p>Category: {product.category_id.name}</p>
-          <p>Price: {product.price}</p>
-          <p>Units: {product.stock}</p>
+          {/* Price section with editable InputNumber */}
+          <p>
+            Price:{" "}
+            <InputNumber
+              defaultValue={product.price}
+              onChange={(value) => handlePriceChange(product._id, value)}
+            />
+          </p>
+
+          <p>
+            Units:{" "}
+            <InputNumber
+              defaultValue={product.stock}
+              onChange={(value) => handleUnitChange(product._id, value)}
+            />
+          </p>
         </Card>
       ))}
 

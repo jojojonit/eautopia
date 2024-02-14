@@ -14,3 +14,8 @@ export async function deleteProduct(productId) {
   const response = await productsAPI.deleteProduct(productId);
   return response;
 }
+
+export async function updateProduct(id, productData) {
+  const response = await productsAPI.updateProduct(id, productData);
+  return response;
+}

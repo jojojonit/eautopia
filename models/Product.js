@@ -2,9 +2,14 @@ const { Schema, model } = require("mongoose");
 
 const notesSchema = new Schema(
   {
-    name: {
+    head: {
       type: String,
-      required: true,
+    },
+    heart: {
+      type: String,
+    },
+    base: {
+      type: String,
     },
   },
   {

@@ -39,3 +39,21 @@ export async function deleteProduct(productId) {
     return null;
   }
 }
+
+export async function updateProduct(id, productData) {
+  try {
+    const res = await sendRequest(
+      BASE_URL + `/${id}/update`,
+      "PATCH",
+      productData
+    );
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res;
+    }
+  } catch (error) {
+    console.error("Error updating product:", error);
+    return null;
+  }
+}
