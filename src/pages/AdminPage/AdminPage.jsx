@@ -2,14 +2,14 @@ import { Button, Card, InputNumber, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  addNotes,
   deleteProduct,
   getAllProducts,
   updateProduct,
 } from "../../utilities/product-service";
 import { logOut } from "../../utilities/users-service";
-
 import { DeleteTwoTone, EditTwoTone, SettingOutlined } from "@ant-design/icons";
-
+import NotesForm from "../../components/Products/NotesForm";
 const { Meta } = Card;
 
 export default function AdminPage({
@@ -23,8 +23,16 @@ export default function AdminPage({
   loading,
 }) {
   console.log("ADMIN PAGE PRODUCTS", products);
-
+  const [open, setOpen] = useState(false);
+  const [storedId, setStoredId] = useState(null);
   const navigate = useNavigate();
+
+  const onCreate = async (values) => {
+    console.log("Received values of form: ", storedId, values);
+    const notes = await addNotes(storedId, values);
+    setOpen(false);
+    loadProducts();
+  };
 
   const handleAdd = () => {
     console.log("add new product");
@@ -40,6 +48,11 @@ export default function AdminPage({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleAddNotes = (id) => {
+    setOpen(true);
+    setStoredId(id);
   };
 
   // const loadProducts = async () => {
@@ -98,7 +111,11 @@ export default function AdminPage({
           loading={loading}
           actions={[
             <SettingOutlined key="setting" />,
-            <EditTwoTone twoToneColor="#eb2f96" key="edit" />,
+            <EditTwoTone
+              twoToneColor="#eb2f96"
+              key="edit"
+              onClick={() => handleAddNotes(product._id)}
+            />,
             <DeleteTwoTone
               twoToneColor="#eb2f96"
               key="delete"
@@ -135,6 +152,14 @@ export default function AdminPage({
 
       <Button onClick={handleAdd}>Add new product</Button>
       <Button onClick={handleLogOut}>Log Out</Button>
+
+      <NotesForm
+        open={open}
+        onCreate={onCreate}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />
     </>
   );
 }
