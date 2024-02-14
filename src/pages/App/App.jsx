@@ -37,7 +37,7 @@ function App() {
   useEffect(() => {
     loadProducts();
     loadCart();
-  }, []);
+  }, [user]);
 
   const loadProducts = async () => {
     try {
@@ -179,7 +179,13 @@ function App() {
       )}
 
       <Drawer width={640} closable={false} onClose={onClose} open={open}>
-        <Cart cart={cart} loadCart={loadCart} onClose={() => setOpen(false)} />
+        <Cart
+          cart={cart}
+          user={user}
+          setUser={setUser}
+          loadCart={loadCart}
+          onClose={() => setOpen(false)}
+        />
       </Drawer>
     </>
   );

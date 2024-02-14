@@ -3,8 +3,9 @@ import CartItem from "./CartItem";
 import { Link, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { checkout } from "../../utilities/order-service";
+import LoginForm from "../LoginForm/LoginForm";
 
-export default function Cart({ cart, loadCart, onClose }) {
+export default function Cart({ cart, user, setUser, loadCart, onClose }) {
   const navigate = useNavigate();
 
   // const cartItems = cart.orders
@@ -38,26 +39,35 @@ export default function Cart({ cart, loadCart, onClose }) {
     <>
       <h1>Cart</h1>
 
-      {cartItems.length > 0 ? (
-        cartItems.map((item, index) => (
-          <CartItem
-            key={index}
-            id={item._id}
-            quantity={item.quantity}
-            price={item.price}
-            name={item.product_id.name}
-            loadCart={loadCart}
-          />
-        ))
+      {user ? (
+        <>
+          {cartItems.length > 0 ? (
+            cartItems.map((item, index) => (
+              <CartItem
+                key={index}
+                id={item._id}
+                quantity={item.quantity}
+                price={item.price}
+                name={item.product_id.name}
+                loadCart={loadCart}
+              />
+            ))
+          ) : (
+            <p>Nothing yet, start shopping!</p>
+          )}
+
+          <b>subtotal: ${subtotal}</b>
+          <br />
+          <br />
+
+          <Button onClick={handleCheckOut}>Continue To Checkout</Button>
+        </>
       ) : (
-        <p>Nothing yet, start shopping!</p>
+        <>
+          <p>Please login or create an account with us to start shopping!</p>
+          <LoginForm setUser={setUser} />
+        </>
       )}
-
-      <b>subtotal: ${subtotal}</b>
-      <br />
-      <br />
-
-      <Button onClick={handleCheckOut}>Continue To Checkout</Button>
     </>
   );
 }
