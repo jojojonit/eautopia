@@ -18,14 +18,9 @@ export default function AdminPage({
   loadProducts,
   loading,
 }) {
-  // const [loading, setLoading] = useState(true);
+  console.log("ADMIN PAGE PRODUCTS", products);
   const [formView, setFormView] = useState(true);
-  // const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   loadProducts();
-  // }, [user]);
 
   const handleAdd = () => {
     console.log("add new product");
@@ -71,7 +66,7 @@ export default function AdminPage({
             marginTop: 16,
           }}
           key={index}
-          productId={`${product._id}`}
+          id={`${product._id}`}
           loading={loading}
           actions={[
             <SettingOutlined key="setting" />,
@@ -90,7 +85,7 @@ export default function AdminPage({
           />
 
           <p>Description: {product.description}</p>
-          <p>Category: {product.category_id}</p>
+          <p>Category: {product.category_id.name}</p>
           <p>Price: {product.price}</p>
           <p>Units: {product.stock}</p>
         </Card>
