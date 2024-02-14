@@ -21,5 +21,6 @@ router.delete(
   checkAdmin,
   productController.deleteProduct
 );
+router.post("/:id/addNotes", productController.addNotes);
 
 module.exports = router;

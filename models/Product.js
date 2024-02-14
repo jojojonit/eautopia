@@ -31,10 +31,7 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    notes: {
-      type: [notesSchema],
-      default: undefined,
-    },
+    notes: [notesSchema],
     category_id: {
       type: Schema.Types.ObjectId,
       ref: "Category",

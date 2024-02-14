@@ -67,7 +67,16 @@ export default function CreateProductPage({ loadProducts, user, category }) {
           <Input />
         </Form.Item>
 
-        <Form.Item label="Product Description" name="description">
+        <Form.Item
+          label="Product Description"
+          name="description"
+          rules={[
+            {
+              required: true,
+              message: "Please provide description for product",
+            },
+          ]}
+        >
           <TextArea />
         </Form.Item>
 

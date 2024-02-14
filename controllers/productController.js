@@ -64,9 +64,32 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const addNotes = async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  try {
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({ error: "product not found" });
+    }
+
+    product.notes.push(data);
+    await product.save();
+
+    res.json({ msg: "Notes added successfully", data, product });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   getAll,
   createProduct,
   updateProduct,
   deleteProduct,
+  addNotes,
 };
