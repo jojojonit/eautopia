@@ -42,6 +42,12 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
+    review_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   {
     timestamps: true,
