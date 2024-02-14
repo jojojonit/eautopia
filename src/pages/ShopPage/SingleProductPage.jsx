@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import { useParams } from "react-router-dom";
+import Reviews from "../../components/Reviews/Reviews";
 
 export default function SingleProductPage({ products, handleAddToCart }) {
   const { id } = useParams();
@@ -13,6 +14,8 @@ export default function SingleProductPage({ products, handleAddToCart }) {
       <Button onClick={(event) => handleAddToCart(event, product)}>
         BUY {product.name}
       </Button>
+
+      <Reviews />
     </>
   );
 }

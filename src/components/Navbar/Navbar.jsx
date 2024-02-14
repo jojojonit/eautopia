@@ -5,7 +5,7 @@ export default function Navbar({ user, showDrawer }) {
     <>
       <nav>
         <NavLink to="/">Home</NavLink>/<NavLink to="/shop">Shop</NavLink>/
-        <NavLink to="/shop">About</NavLink>/
+        <NavLink to="/about">About</NavLink>/
         <NavLink to={user ? "/account/user" : "/account/login"}>
           Account
         </NavLink>

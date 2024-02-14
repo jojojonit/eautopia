@@ -21,6 +21,7 @@ import SingleProductPage from "../ShopPage/SingleProductPage";
 import CheckoutPage from "../CheckoutPage/CheckoutPage";
 import Success from "../CheckoutPage/Success";
 import Cancel from "../CheckoutPage/Cancel";
+import AboutPage from "../AboutPage/AboutPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -115,7 +116,7 @@ function App() {
             />
           }
         />
-
+<Route path="/about" element={<AboutPage />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
 
