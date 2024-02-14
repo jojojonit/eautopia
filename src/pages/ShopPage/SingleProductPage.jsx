@@ -34,7 +34,7 @@ export default function SingleProductPage({ products, handleAddToCart }) {
         BUY {product.name}
       </Button>
 
-      <Reviews review={review} />
+      <Reviews review={review} product={product} />
     </>
   );
 }
