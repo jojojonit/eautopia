@@ -16,6 +16,10 @@ import CartPage from "../CartPage/CartPage";
 import { Drawer } from "antd";
 import Cart from "../../components/Cart/Cart";
 import { getCart, viewCart } from "../../utilities/order-service";
+import {
+  createCategory,
+  getCategories,
+} from "../../utilities/category-service";
 import { addToCart } from "../../utilities/order-service";
 import SingleProductPage from "../ShopPage/SingleProductPage";
 import CheckoutPage from "../CheckoutPage/CheckoutPage";
@@ -30,6 +34,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [category, setCategory] = useState([]);
 
   console.log("user check", user);
   console.log("admin check", admin);
@@ -37,6 +42,7 @@ function App() {
   useEffect(() => {
     loadProducts();
     loadCart();
+    loadCategories();
   }, [user]);
 
   const loadProducts = async () => {
@@ -57,6 +63,16 @@ function App() {
       console.log("CART fetched successfully", cart);
     } catch (error) {
       console.error("Error fetching CART:", error);
+    }
+  };
+
+  const loadCategories = async () => {
+    try {
+      const response = await getCategories();
+      setCategory(response);
+      console.log("CATEGORIES fetched successfully", category);
+    } catch (error) {
+      console.error("Error fetching CATEGORIES:", error);
     }
   };
 
@@ -161,6 +177,8 @@ function App() {
                 admin={admin}
                 setAdmin={setAdmin}
                 loadProducts={loadProducts}
+                category={category}
+                user={user}
               />
             }
           />

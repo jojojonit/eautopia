@@ -5,17 +5,37 @@ import TextArea from "antd/es/input/TextArea";
 import { useRef, useState } from "react";
 import { createProduct } from "../../utilities/product-service";
 import { useNavigate } from "react-router-dom";
+import {
+  createCategory,
+  getCategories,
+} from "../../utilities/category-service";
+import { useEffect } from "react";
 
-export default function CreateProductPage({ loadProducts }) {
+export default function CreateProductPage({ loadProducts, user, category }) {
   const navigate = useNavigate();
-  const [items, setItems] = useState(["65c7a08bfc736911bf949631"]);
+  const [items, setItems] = useState(["hello"]);
   const [name, setName] = useState("");
   const inputRef = useRef(null);
+
+  const categories = category.category;
+
+  // useEffect(() => {
+  //   loadCategories();
+  // }, [user]);
+
+  console.log("CATS", categories);
+
   const onNameChange = (event) => {
     setName(event.target.value);
   };
-  const addItem = (e) => {
+  const addItem = async (e) => {
     e.preventDefault();
+    const data = {
+      name: name,
+    };
+    console.log("CREATE", data);
+    const newCategory = await createCategory(data);
+
     setItems([...items, name || `New item ${index++}`]);
     setName("");
     setTimeout(() => {
@@ -29,6 +49,7 @@ export default function CreateProductPage({ loadProducts }) {
     loadProducts();
     navigate("/admin");
   };
+
   return (
     <>
       <h1>Add a New Product</h1>
@@ -88,9 +109,9 @@ export default function CreateProductPage({ loadProducts }) {
                 </Space>
               </>
             )}
-            options={items.map((item) => ({
-              label: item,
-              value: item,
+            options={categories.map((item) => ({
+              label: item.name,
+              value: item._id,
             }))}
           />
         </Form.Item>
