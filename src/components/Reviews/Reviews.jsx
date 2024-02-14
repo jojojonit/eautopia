@@ -1,23 +1,43 @@
-import { Collapse, theme } from "antd";
+import { Collapse, Dropdown, Space, theme } from "antd";
 import ReviewsItem from "./ReviewsItem";
 import ReviewForm from "./ReviewForm";
-import { MinusCircleTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
-
-// const getItems = (panelStyle) => [
-//   {
-//     key: "1",
-//     label: "ADD A REVIEW",
-//     children: <ReviewForm product={product} />,
-//     // showArrow: false,
-//     style: panelStyle,
-//   },
-// ];
+import {
+  DownOutlined,
+  MinusCircleTwoTone,
+  PlusCircleTwoTone,
+} from "@ant-design/icons";
+import { useState } from "react";
 
 export default function Reviews({ review, product, user, loadReviews }) {
   const reviews = review?.reviews || []; // Ensure that review.reviews is an array
   console.log("REVIEW COMPONENT", review.reviews);
+  const [sortOrder, setSortOrder] = useState("Most Recent");
 
   const { token } = theme.useToken();
+
+  const items = [
+    {
+      label: "Most Recent",
+      key: "Most Recent",
+    },
+    {
+      label: "Oldest",
+      key: "Oldest",
+    },
+    {
+      label: "Highest to Lowest",
+      key: "Highest to Lowest",
+    },
+    {
+      label: "Lowest to Highest",
+      key: "Lowest to Highest",
+    },
+  ];
+
+  const onClick = ({ key }) => {
+    console.log("Click on item", key);
+    setSortOrder(key);
+  };
 
   const getItems = (panelStyle) => [
     {
@@ -26,7 +46,6 @@ export default function Reviews({ review, product, user, loadReviews }) {
       children: (
         <ReviewForm product={product} user={user} loadReviews={loadReviews} />
       ),
-      // showArrow: false,
       style: panelStyle,
     },
   ];
@@ -36,6 +55,24 @@ export default function Reviews({ review, product, user, loadReviews }) {
     borderRadius: token.borderRadiusLG,
     border: "none",
   };
+
+  const sortedReviews = [...reviews];
+
+  switch (sortOrder) {
+    case "Oldest":
+      sortedReviews.sort((a, b) => new Date(a.date) - new Date(b.date));
+      break;
+    case "Highest to Lowest":
+      sortedReviews.sort((a, b) => b.rating - a.rating);
+      break;
+    case "Lowest to Highest":
+      sortedReviews.sort((a, b) => a.rating - b.rating);
+      break;
+
+    default:
+      sortedReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+      break;
+  }
   return (
     <>
       <h2>Reviews</h2>
@@ -52,7 +89,21 @@ export default function Reviews({ review, product, user, loadReviews }) {
         }
       />
       <br />
-      {reviews.map((item, index) => (
+      <Dropdown
+        menu={{
+          items,
+          onClick,
+        }}
+      >
+        <a onClick={(e) => e.preventDefault()}>
+          <Space>
+            Sort
+            <DownOutlined />
+          </Space>
+        </a>
+      </Dropdown>
+
+      {sortedReviews.map((item, index) => (
         <ReviewsItem
           key={index}
           id={item._id}
