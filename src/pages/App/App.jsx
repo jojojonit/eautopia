@@ -86,7 +86,12 @@ function App() {
   };
   return (
     <>
-      <Navbar user={user} showDrawer={showDrawer} onClose={onClose} />
+      <Navbar
+        user={user}
+        admin={admin}
+        showDrawer={showDrawer}
+        onClose={onClose}
+      />
       <Routes>
         <Route path="/" element={<Homepage user={user} setUser={setUser} />} />
         <Route

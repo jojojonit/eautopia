@@ -19,7 +19,7 @@ export default function AdminPage({
   loading,
 }) {
   console.log("ADMIN PAGE PRODUCTS", products);
-  const [formView, setFormView] = useState(true);
+
   const navigate = useNavigate();
 
   const handleAdd = () => {
