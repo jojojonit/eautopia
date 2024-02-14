@@ -13,7 +13,7 @@ import ShopPage from "../ShopPage/ShopPage";
 import { getAllProducts } from "../../utilities/product-service";
 import Navbar from "../../components/Navbar/Navbar";
 import CartPage from "../CartPage/CartPage";
-import { Drawer } from "antd";
+import { Drawer, Input, Space } from "antd";
 import Cart from "../../components/Cart/Cart";
 import { getCart, viewCart } from "../../utilities/order-service";
 import {
@@ -26,11 +26,14 @@ import CheckoutPage from "../CheckoutPage/CheckoutPage";
 import Success from "../CheckoutPage/Success";
 import Cancel from "../CheckoutPage/Cancel";
 import AboutPage from "../AboutPage/AboutPage";
+import { Header } from "antd/es/layout/layout";
+import Search from "../../components/Search/Search";
 
 function App() {
   const [user, setUser] = useState(getUser());
   const [admin, setAdmin] = useState(getAdmin());
   const [open, setOpen] = useState(false);
+  const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
@@ -100,14 +103,34 @@ function App() {
   const onClose = () => {
     setOpen(false);
   };
+  const showSearchDrawer = () => {
+    setSearchDrawerOpen(true);
+  };
+  const onCloseSearchDrawer = () => {
+    setSearchDrawerOpen(false);
+  };
   return (
     <>
-      <Navbar
-        user={user}
-        admin={admin}
-        showDrawer={showDrawer}
-        onClose={onClose}
-      />
+      <Header style={{ background: "#f0f0f0" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "0 16px",
+          }}
+        >
+          <Navbar
+            user={user}
+            admin={admin}
+            showDrawer={showDrawer}
+            onClose={onClose}
+            showSearchDrawer={showSearchDrawer}
+            onCloseSearchDrawer={onCloseSearchDrawer}
+          />
+        </div>
+      </Header>
+
       <Routes>
         <Route path="/" element={<Homepage user={user} setUser={setUser} />} />
         <Route
@@ -209,6 +232,18 @@ function App() {
           loadCart={loadCart}
           onClose={() => setOpen(false)}
         />
+      </Drawer>
+
+      <Drawer
+        width={640}
+        closable={false}
+        onClose={onCloseSearchDrawer}
+        open={searchDrawerOpen}
+      >
+        {/* Implement your search component here */}
+        <Space direction="vertical" style={{ padding: "16px" }}>
+          <Search products={products} />
+        </Space>
       </Drawer>
     </>
   );

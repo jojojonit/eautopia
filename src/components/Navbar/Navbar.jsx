@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function Navbar({ user, admin, showDrawer }) {
+export default function Navbar({ user, admin, showDrawer, showSearchDrawer }) {
   return (
     <>
       <nav>
@@ -11,6 +11,10 @@ export default function Navbar({ user, admin, showDrawer }) {
         >
           Account
         </NavLink>
+        /
+        <a href="#" onClick={showSearchDrawer}>
+          Search
+        </a>
         /
         <a href="#" onClick={showDrawer}>
           Cart
