@@ -9,6 +9,17 @@ const getAll = async (req, res) => {
   }
 };
 
+const getPerfumes = async (req, res) => {
+  try {
+    const products = await Product.find({
+      category_id: "65c7a08bfc736911bf949631",
+    }).populate("category_id");
+    res.status(200).json({ products });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const createProduct = async (req, res) => {
   const data = req.body;
   try {
@@ -88,6 +99,7 @@ const addNotes = async (req, res) => {
 
 module.exports = {
   getAll,
+  getPerfumes,
   createProduct,
   updateProduct,
   deleteProduct,

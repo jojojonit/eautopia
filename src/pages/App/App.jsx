@@ -146,6 +146,7 @@ function App() {
               setUser={setUser}
               products={products}
               setProducts={setProducts}
+              category={category}
               loading={loading}
               showDrawer={showDrawer}
               loadCart={loadCart}
