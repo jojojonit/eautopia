@@ -4,6 +4,7 @@ import {
   PlusCircleTwoTone,
 } from "@ant-design/icons";
 import { deleteCartItem, updateCart } from "../../utilities/order-service";
+import "./Cart.css";
 
 export default function CartItem({ id, quantity, price, name, img, loadCart }) {
   const handleMinus = async () => {
@@ -39,24 +40,31 @@ export default function CartItem({ id, quantity, price, name, img, loadCart }) {
 
   return (
     <>
-      <h3>{name}</h3>
-      <img src={img} alt={name} style={{ maxWidth: "50%" }} />
-      <br />
-      <span
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          columnGap: "10px",
-        }}
-      >
-        <MinusCircleTwoTone twoToneColor="#eb2f96" onClick={handleMinus} />
-        <p>{quantity}</p>
-        <PlusCircleTwoTone twoToneColor="#eb2f96" onClick={handlePlus} />
-      </span>
-      <p>$ {updatedPrice}</p>
-      <CloseCircleTwoTone twoToneColor="#eb2f96" onClick={handleRemove} />
-      <br />
-      <br />
+      <div className="cart-item">
+        <img
+          src={img}
+          alt={name}
+          style={{ maxWidth: "20%", borderRadius: "25px" }}
+        />
+        <div className="details">
+          <div className="name">
+            <h3>{name}</h3>
+            <h3>$ {updatedPrice}</h3>
+          </div>
+          <div className="adjust">
+            <span className="quantity">
+              <MinusCircleTwoTone
+                twoToneColor="#eb2f96"
+                onClick={handleMinus}
+              />
+              <p>{quantity}</p>
+              <PlusCircleTwoTone twoToneColor="#eb2f96" onClick={handlePlus} />
+            </span>
+
+            <CloseCircleTwoTone twoToneColor="#eb2f96" onClick={handleRemove} />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

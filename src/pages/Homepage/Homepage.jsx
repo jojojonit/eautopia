@@ -16,24 +16,8 @@ export default function Homepage({ user, setUser }) {
           padding: "0 48px",
         }}
       >
-        {/* <div
-          style={{
-            padding: 24,
-            minHeight: 380,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <h1>Homepage</h1>
-        </div> */}
+        <h1>EAUTOPIA</h1>
       </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
-      </Footer>
     </Layout>
   );
 }

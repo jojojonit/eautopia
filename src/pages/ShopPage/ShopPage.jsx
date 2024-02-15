@@ -32,14 +32,23 @@ export default function ShopPage({
         }}
       >
         <div className="category-container">
-          <Button onClick={() => handleCategoryChange(null)}>
-            All Categories
-          </Button>
-          {productCategory.map((category, index) => (
-            <Button key={index} onClick={() => handleCategoryChange(category)}>
-              {category.name}
+          <div className="button-holder">
+            <Button
+              className="category"
+              onClick={() => handleCategoryChange(null)}
+            >
+              All
             </Button>
-          ))}
+            {productCategory.map((category, index) => (
+              <Button
+                className="category"
+                key={index}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category.name}
+              </Button>
+            ))}
+          </div>
         </div>
         <div className="product-container">
           {filteredProducts.map((product, index) => (

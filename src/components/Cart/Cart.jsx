@@ -1,21 +1,11 @@
 import { Button } from "antd";
 import CartItem from "./CartItem";
-import { Link, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { checkout } from "../../utilities/order-service";
 import LoginForm from "../LoginForm/LoginForm";
+import "./Cart.css";
 
 export default function Cart({ cart, user, setUser, loadCart, onClose }) {
-  const navigate = useNavigate();
-
-  // const cartItems = cart.orders
-  //   ? cart.orders.flatMap((order) => order.items || []) // Flattening items from each order
-  //   : [];
-
-  // const subtotal = cartItems.reduce((acc, item) => {
-  //   return acc + item.quantity * item.price;
-  // }, 0);
-  // console.log("CART ITEMS", cartItems);
   const cartItems = (cart && cart.order && cart.order.items) || [];
 
   console.log("CART CHECKOUT", cartItems);
@@ -32,8 +22,6 @@ export default function Cart({ cart, user, setUser, loadCart, onClose }) {
     };
 
     const response = await checkout(body);
-    // onClose();
-    // navigate("/checkout");
   };
   return (
     <>
@@ -57,11 +45,11 @@ export default function Cart({ cart, user, setUser, loadCart, onClose }) {
             <p>Nothing yet, start shopping!</p>
           )}
 
-          <b>subtotal: ${subtotal}</b>
-          <br />
-          <br />
+          <h3 style={{ textAlign: "right" }}>SUBTOTAL ${subtotal}</h3>
 
-          <Button onClick={handleCheckOut}>Continue To Checkout</Button>
+          <Button className="checkout" onClick={handleCheckOut}>
+            Continue To Checkout
+          </Button>
         </>
       ) : (
         <>

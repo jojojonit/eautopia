@@ -21,7 +21,7 @@ export default function Search({ products }) {
       <Input
         prefix={<SearchOutlined />}
         variant="filled"
-        style={{ width: "40em" }}
+        style={{ width: "40em", marginBottom: "30px" }}
         placeholder="what are you looking for?"
         onChange={(e) => handleSearch(e.target.value)}
       />
