@@ -54,12 +54,13 @@ export default function SignUpForm({ setUser }) {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h2>Sign Up</h2>
       <Form
         {...formItemLayout}
         name="sign up"
         onFinish={handleSubmit}
         style={{ maxWidth: 600 }}
+        variant="filled"
       >
         <Form.Item
           name="name"
@@ -127,9 +128,7 @@ export default function SignUpForm({ setUser }) {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Sign Up
-          </Button>
+          <Button htmlType="submit">Sign Up</Button>
         </Form.Item>
       </Form>
     </>
