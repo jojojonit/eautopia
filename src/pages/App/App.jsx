@@ -113,24 +113,25 @@ function App() {
   };
   return (
     <>
-      <Header style={{ background: "#f0f0f0" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "0 16px",
-          }}
-        >
-          <Navbar
-            user={user}
-            getAdmin={getAdmin}
-            showDrawer={showDrawer}
-            onClose={onClose}
-            showSearchDrawer={showSearchDrawer}
-            onCloseSearchDrawer={onCloseSearchDrawer}
-          />
-        </div>
+      <Header
+        style={{
+          display: "flex",
+          background: "none",
+          position: "sticky",
+          top: 0,
+          zIndex: 1,
+          alignItems: "center",
+          height: "100px",
+        }}
+      >
+        <Navbar
+          user={user}
+          getAdmin={getAdmin}
+          showDrawer={showDrawer}
+          onClose={onClose}
+          showSearchDrawer={showSearchDrawer}
+          onCloseSearchDrawer={onCloseSearchDrawer}
+        />
       </Header>
 
       <Routes>

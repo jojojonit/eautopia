@@ -1,6 +1,8 @@
 import { Button } from "antd";
 import ShopItem from "../../components/Shop/ShopItem";
 import { useState } from "react";
+import { Content } from "antd/es/layout/layout";
+import "./ShopPage.css";
 
 export default function ShopPage({
   products,
@@ -29,32 +31,38 @@ export default function ShopPage({
 
   return (
     <>
-      <h1>Shop</h1>
-
-      <div>
-        <Button onClick={() => handleCategoryChange(null)}>
-          All Categories
-        </Button>
-        {productCategory.map((category, index) => (
-          <Button key={index} onClick={() => handleCategoryChange(category)}>
-            {category.name}
+      <Content
+        style={{
+          padding: "0 48px",
+        }}
+      >
+        <div className="category-container">
+          <Button onClick={() => handleCategoryChange(null)}>
+            All Categories
           </Button>
-        ))}
-      </div>
-      {filteredProducts.map((product, index) => (
-        <ShopItem
-          key={index}
-          id={product._id}
-          img={product.img}
-          name={product.name}
-          description={product.description}
-          category={product.category_id}
-          price={product.price}
-          showDrawer={showDrawer}
-          loadCart={loadCart}
-          handleAddToCart={(event) => handleAddToCart(event, product)}
-        />
-      ))}
+          {productCategory.map((category, index) => (
+            <Button key={index} onClick={() => handleCategoryChange(category)}>
+              {category.name}
+            </Button>
+          ))}
+        </div>
+        <div className="product-container">
+          {filteredProducts.map((product, index) => (
+            <ShopItem
+              key={index}
+              id={product._id}
+              img={product.img}
+              name={product.name}
+              description={product.description}
+              category={product.category_id}
+              price={product.price}
+              showDrawer={showDrawer}
+              loadCart={loadCart}
+              handleAddToCart={(event) => handleAddToCart(event, product)}
+            />
+          ))}
+        </div>
+      </Content>
     </>
   );
 }

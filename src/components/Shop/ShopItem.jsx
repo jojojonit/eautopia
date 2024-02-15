@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./ShopItem.css";
 
 export default function ShopItem({
   id,
@@ -33,13 +34,23 @@ export default function ShopItem({
   // };
   return (
     <>
-      <div onClick={handleClick}>
-        <img src={img} alt={name} style={{ maxWidth: "50%" }} />
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <p>$ {price}</p>
+      <div
+        onClick={handleClick}
+        className="shop-card"
+        style={{
+          backgroundImage: `url(${img})`,
+          backgroundSize: "100%",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="card-title">
+          <h4>{name}</h4>
+          <p>$ {price}</p>
+        </div>
+        {/* <p>{description}</p> */}
         <Button
           onClick={(event) => handleAddToCart(event, { id, name, price })}
+          className="buy-button"
         >
           BUY {name}
         </Button>

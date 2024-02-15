@@ -3,20 +3,11 @@ import { Link } from "react-router-dom";
 
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 const { Header, Content, Footer } = Layout;
-const items = [
-  { key: "1", label: "Shop" },
-  { key: "2", label: "About" },
-  {
-    key: "3",
-    label: "Search",
-  },
-  { key: "4", label: "Cart" },
-];
 
 export default function Homepage({ user, setUser }) {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  // const {
+  //   token: { colorBgContainer, borderRadiusLG },
+  // } = theme.useToken();
 
   return (
     <Layout>
@@ -25,7 +16,7 @@ export default function Homepage({ user, setUser }) {
           padding: "0 48px",
         }}
       >
-        <div
+        {/* <div
           style={{
             padding: 24,
             minHeight: 380,
@@ -34,7 +25,7 @@ export default function Homepage({ user, setUser }) {
           }}
         >
           <h1>Homepage</h1>
-        </div>
+        </div> */}
       </Content>
       <Footer
         style={{
