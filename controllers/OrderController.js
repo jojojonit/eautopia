@@ -45,6 +45,22 @@ const getOrderByUser = async (req, res) => {
   }
 };
 
+const getCompletedOrderByUser = async (req, res) => {
+  const user_id = req.user._id;
+  try {
+    const order = await Order.find({ user_id, completed: true }).populate({
+      path: "items",
+      populate: [
+        { path: "product_id", model: "Product" },
+        { path: "order_id", model: "Order" },
+      ],
+    });
+    res.status(200).json({ order });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const createOrderItemByUser = async (req, res) => {
   try {
     const { product_id, quantity, price } = req.body;
@@ -239,6 +255,7 @@ module.exports = {
   getAll,
   find,
   getOrderByUser,
+  getCompletedOrderByUser,
   createOrderItem,
   createOrderItemByUser,
   updateOrderItemByUser,

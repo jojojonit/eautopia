@@ -1,10 +1,17 @@
-export default function Orders() {
+import { Card } from "antd";
+
+export default function Orders({ complete }) {
+  const completedOrders = complete.order;
+  console.log("ORDERS PAGE", completedOrders);
+
   return (
     <>
-      <h3>current orders</h3>
-      <p>nothing!</p>
-      <h3>past orders</h3>
-      <p>nothing!</p>
+      {completedOrders.map((order) => (
+        <Card key={order._id} title={`ORDER #ID ${order._id}`}>
+          <p>completed: {order.completed ? "Yes" : "No"}</p>
+          <p>date: {order.date}</p>
+        </Card>
+      ))}
     </>
   );
 }

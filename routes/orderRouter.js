@@ -10,6 +10,12 @@ router.get("/find", orderController.find);
 router.post("/guestaddtocart", orderController.createOrderItem);
 
 router.get("/viewcart", checkToken, orderController.getOrderByUser);
+router.get(
+  "/viewcomplete",
+  checkToken,
+  orderController.getCompletedOrderByUser
+);
+
 router.post("/addtocart", checkToken, orderController.createOrderItemByUser);
 router.patch("/updatecart", checkToken, orderController.updateOrderItemByUser);
 router.delete(

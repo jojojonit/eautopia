@@ -40,6 +40,17 @@ export async function viewCart() {
   }
 }
 
+export async function viewComplete() {
+  const res = await sendRequest(BASE_URL + "/viewcomplete", "GET");
+  if (res.ok) {
+    console.log("Past Orders fetched successfully");
+    return res.json();
+  } else {
+    console.log("Error in fetching addresses");
+    throw new Error("Invalid (viewComplete)");
+  }
+}
+
 export async function addToCart(orderItem) {
   try {
     const res = await sendRequest(BASE_URL + "/addtocart", "POST", orderItem);
