@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import { deleteCartItem, updateCart } from "../../utilities/order-service";
 
-export default function CartItem({ id, quantity, price, name, loadCart }) {
+export default function CartItem({ id, quantity, price, name, img, loadCart }) {
   const handleMinus = async () => {
     const newQuantity = quantity > 1 ? quantity - 1 : quantity;
     const updatedOrderItem = await updateCart({ id, newQuantity });
@@ -40,6 +40,8 @@ export default function CartItem({ id, quantity, price, name, loadCart }) {
   return (
     <>
       <h3>{name}</h3>
+      <img src={img} alt={name} style={{ maxWidth: "50%" }} />
+      <br />
       <span
         style={{
           display: "inline-flex",

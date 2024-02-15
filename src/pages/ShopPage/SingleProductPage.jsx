@@ -27,6 +27,7 @@ export default function SingleProductPage({ user, products, handleAddToCart }) {
   return (
     <>
       <h1>{product.name}</h1>
+      <img src={product.img} alt={name} style={{ maxWidth: "50%" }} />
       <p>{product.description}</p>
       <p>{product.price}</p>
 

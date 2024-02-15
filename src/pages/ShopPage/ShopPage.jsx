@@ -16,6 +16,7 @@ export default function ShopPage({
         <ShopItem
           key={index}
           id={product._id}
+          img={product.img}
           name={product.name}
           description={product.description}
           category={product.category}

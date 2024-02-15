@@ -128,7 +128,7 @@ export default function AdminPage({
             title={`${product.name}`}
             description={`#ID ${product._id}`}
           />
-
+          <img src={product.img} alt={product} style={{ maxWidth: "50%" }} />
           <p>Description: {product.description}</p>
           <p>Category: {product.category_id.name}</p>
           {/* Price section with editable InputNumber */}

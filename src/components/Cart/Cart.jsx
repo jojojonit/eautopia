@@ -49,6 +49,7 @@ export default function Cart({ cart, user, setUser, loadCart, onClose }) {
                 quantity={item.quantity}
                 price={item.price}
                 name={item.product_id.name}
+                img={item.product_id.img}
                 loadCart={loadCart}
               />
             ))
