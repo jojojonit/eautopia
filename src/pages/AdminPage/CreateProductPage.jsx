@@ -149,27 +149,6 @@ export default function CreateProductPage({ loadProducts, user, category }) {
         </Button>
       </Form>
 
-      {/* // <h1>Notes</h1>
-          // <Form name="create_notes" layout="vertical" onFinish={onFinishNotes}>
-          //   <Form.Item name="head">
-          //     <Input prefix="HEAD" />
-          //   </Form.Item>
-
-          //   <Form.Item name="heart">
-          //     <Input prefix="HEART" />
-          //   </Form.Item>
-
-          //   <Form.Item name="base">
-          //     <Input prefix="BASE" />
-          //   </Form.Item>
-
-          //   <Button type="primary" htmlType="submit">
-          //     Submit
-          //   </Button>
-          // </Form> */}
-
-      <br />
-      <br />
       <Button onClick={() => navigate(-1)}>back</Button>
     </>
   );
