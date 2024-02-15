@@ -39,6 +39,8 @@ export default function Search({ products }) {
               </Link>
             }
           >
+            <img src={product.img} alt={name} style={{ maxWidth: "50%" }} />
+
             <p>Description: {product.description}</p>
             <p>Category: {product.category_id.name}</p>
             <p>Price: {product.price}</p>
