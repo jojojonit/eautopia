@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { getAdmin, getUser } from "../../utilities/users-service";
 import "./App.css";
 import AdminPage from "../AdminPage/AdminPage";
@@ -12,14 +12,10 @@ import ShopPage from "../ShopPage/ShopPage";
 
 import { getAllProducts } from "../../utilities/product-service";
 import Navbar from "../../components/Navbar/Navbar";
-import CartPage from "../CartPage/CartPage";
-import { Drawer, Input, Space } from "antd";
+import { Drawer, FloatButton, Space } from "antd";
 import Cart from "../../components/Cart/Cart";
-import { getCart, viewCart } from "../../utilities/order-service";
-import {
-  createCategory,
-  getCategories,
-} from "../../utilities/category-service";
+import { viewCart } from "../../utilities/order-service";
+import { getCategories } from "../../utilities/category-service";
 import { addToCart } from "../../utilities/order-service";
 import SingleProductPage from "../ShopPage/SingleProductPage";
 import CheckoutPage from "../CheckoutPage/CheckoutPage";
@@ -28,16 +24,24 @@ import Cancel from "../CheckoutPage/Cancel";
 import AboutPage from "../AboutPage/AboutPage";
 import { Header } from "antd/es/layout/layout";
 import Search from "../../components/Search/Search";
+import {
+  CommentOutlined,
+  CustomerServiceOutlined,
+  SmileTwoTone,
+} from "@ant-design/icons";
 
 function App() {
   const [user, setUser] = useState(getUser());
   const [admin, setAdmin] = useState(getAdmin());
   const [open, setOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(true);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [category, setCategory] = useState([]);
+
+  const navigate = useNavigate();
 
   console.log("user check", user);
   console.log("admin check", admin);
@@ -79,8 +83,6 @@ function App() {
     }
   };
 
-  console.log("CART ON APP", cart);
-
   const handleAddToCart = async (event, product) => {
     event.stopPropagation(); // Stop the click event from propagating
     const data = {
@@ -109,6 +111,10 @@ function App() {
   const onCloseSearchDrawer = () => {
     setSearchDrawerOpen(false);
   };
+
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
   return (
     <>
       <Header style={{ background: "#f0f0f0" }}>
@@ -122,7 +128,7 @@ function App() {
         >
           <Navbar
             user={user}
-            admin={admin}
+            getAdmin={getAdmin}
             showDrawer={showDrawer}
             onClose={onClose}
             showSearchDrawer={showSearchDrawer}
@@ -245,6 +251,14 @@ function App() {
           <Search products={products} />
         </Space>
       </Drawer>
+
+      {getAdmin() === "admin" && (
+        <FloatButton
+          tooltip={<div>Admin Only! 🐰 </div>}
+          onClick={handleAdmin}
+          icon={<SmileTwoTone twoToneColor="#eb2f96" />}
+        />
+      )}
     </>
   );
 }
