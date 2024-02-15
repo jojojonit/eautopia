@@ -27,8 +27,15 @@ export default function SingleProductPage({ user, products, handleAddToCart }) {
   return (
     <>
       <h1>{product.name}</h1>
-      <img src={product.img} alt={name} style={{ maxWidth: "50%" }} />
+      <img src={product.img} alt={product} style={{ maxWidth: "50%" }} />
       <p>{product.description}</p>
+      {product.notes.map((note, index) => (
+        <div key={index}>
+          <p>Head: {note.head}</p>
+          <p>Heart: {note.heart}</p>
+          <p>Base: {note.base}</p>
+        </div>
+      ))}
       <p>{product.price}</p>
 
       <Button onClick={(event) => handleAddToCart(event, product)}>

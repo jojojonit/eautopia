@@ -130,6 +130,13 @@ export default function AdminPage({
           />
           <img src={product.img} alt={product} style={{ maxWidth: "50%" }} />
           <p>Description: {product.description}</p>
+          {product.notes.map((note, index) => (
+            <div key={index}>
+              <p>Head: {note.head}</p>
+              <p>Heart: {note.heart}</p>
+              <p>Base: {note.base}</p>
+            </div>
+          ))}
           <p>Category: {product.category_id.name}</p>
           {/* Price section with editable InputNumber */}
           <p>

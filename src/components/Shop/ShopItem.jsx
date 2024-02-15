@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import { useState } from "react";
-import { addToCart } from "../../utilities/order-service";
 import { useNavigate } from "react-router-dom";
 
 export default function ShopItem({
