@@ -24,11 +24,7 @@ import Cancel from "../CheckoutPage/Cancel";
 import AboutPage from "../AboutPage/AboutPage";
 import { Header } from "antd/es/layout/layout";
 import Search from "../../components/Search/Search";
-import {
-  CommentOutlined,
-  CustomerServiceOutlined,
-  SmileTwoTone,
-} from "@ant-design/icons";
+import { SmileTwoTone } from "@ant-design/icons";
 
 function App() {
   const [user, setUser] = useState(getUser());
