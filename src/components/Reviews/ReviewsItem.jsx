@@ -1,4 +1,6 @@
 import { HeartTwoTone } from "@ant-design/icons";
+import { Divider, Empty } from "antd";
+import { format } from "date-fns";
 
 export default function ReviewsItem({ id, title, body, date, rating, user }) {
   const renderHearts = (rating) => {
@@ -11,15 +13,18 @@ export default function ReviewsItem({ id, title, body, date, rating, user }) {
     return hearts;
   };
 
+  const formattedDate = format(new Date(date), "dd MMMM yyyy");
+
   return (
     <>
       <h3>{title}</h3>
       <i>
-        {date}, {user}
+        {formattedDate}, {user}
       </i>
       <br />
       <b>{renderHearts(rating)}</b>
       <p>{body}</p>
+      <Divider style={{ color: "black" }} />
     </>
   );
 }

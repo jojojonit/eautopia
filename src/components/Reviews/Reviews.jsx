@@ -7,6 +7,7 @@ import {
   PlusCircleTwoTone,
 } from "@ant-design/icons";
 import { useState } from "react";
+import "./Reviews.css";
 
 export default function Reviews({ review, product, user, loadReviews }) {
   const reviews = review?.reviews || []; // Ensure that review.reviews is an array
@@ -42,6 +43,25 @@ export default function Reviews({ review, product, user, loadReviews }) {
   const getItems = (panelStyle) => [
     {
       key: "1",
+      label: "NOTES",
+      children: product.notes.map((note, index) => (
+        <div key={index}>
+          <p>
+            <b>HEAD</b> {note.head}
+          </p>
+          <p>
+            <b>HEART</b> {note.heart}
+          </p>
+          <p>
+            <b>BASE</b> {note.base}
+          </p>
+        </div>
+      )),
+
+      style: panelStyle,
+    },
+    {
+      key: "2",
       label: "ADD A REVIEW",
       children: (
         <ReviewForm product={product} user={user} loadReviews={loadReviews} />
@@ -50,10 +70,11 @@ export default function Reviews({ review, product, user, loadReviews }) {
     },
   ];
   const panelStyle = {
-    marginBottom: 24,
-    background: token.colorFillAlter,
+    // marginBottom: 24,
+    background: "none",
     borderRadius: token.borderRadiusLG,
     border: "none",
+    width: "100%",
   };
 
   const sortedReviews = [...reviews];
@@ -76,44 +97,49 @@ export default function Reviews({ review, product, user, loadReviews }) {
 
   return (
     <>
-      <h2>Reviews</h2>
-      <Collapse
-        items={getItems(panelStyle)}
-        bordered={false}
-        expandIcon={({ isActive }) =>
-          isActive ? (
-            <MinusCircleTwoTone twoToneColor="#eb2f96" />
-          ) : (
-            <PlusCircleTwoTone twoToneColor="#eb2f96" />
-          )
-        }
-      />
-      <br />
-      <Dropdown
-        menu={{
-          items,
-          onClick,
-        }}
-      >
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            Sort
-            <DownOutlined />
-          </Space>
-        </a>
-      </Dropdown>
-
-      {sortedReviews.map((item, index) => (
-        <ReviewsItem
-          key={index}
-          id={item._id}
-          title={item.title}
-          body={item.body}
-          date={item.date}
-          rating={item.rating}
-          user={item.user_id.name}
+      <div className="more-details">
+        <Collapse
+          items={getItems(panelStyle)}
+          bordered={false}
+          expandIcon={({ isActive }) =>
+            isActive ? (
+              <MinusCircleTwoTone twoToneColor="#eb2f96" />
+            ) : (
+              <PlusCircleTwoTone twoToneColor="#eb2f96" />
+            )
+          }
+          style={{ width: "100%" }}
         />
-      ))}
+      </div>
+      <br />
+      <div className="review-container">
+        <div className="sort-button">
+          <Dropdown
+            menu={{
+              items,
+              onClick,
+            }}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                SORT
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+        </div>
+        {sortedReviews.map((item, index) => (
+          <ReviewsItem
+            key={index}
+            id={item._id}
+            title={item.title}
+            body={item.body}
+            date={item.date}
+            rating={item.rating}
+            user={item.user_id.name}
+          />
+        ))}
+      </div>
     </>
   );
 }
