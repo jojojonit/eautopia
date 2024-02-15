@@ -21,19 +21,24 @@ export async function signUp(userData) {
 
 export async function login(userData) {
   console.log("Request login:", userData);
-
-  const res = await fetch(BASE_URL + "/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  });
-  console.log("Response from backend:", res);
-  if (res.ok) {
-    console.log("Login successful");
-    return res.json();
-  } else {
-    console.log("Error in login");
-    throw new Error("Invalid login");
+  try {
+    const res = await fetch(BASE_URL + "/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    });
+    const data = await res.json();
+    console.log("Response from backend:", res);
+    if (res.ok) {
+      console.log("Login successful");
+      return data;
+    } else {
+      console.log("Error in login", data.error);
+      throw new Error(data.error);
+    }
+  } catch (error) {
+    console.error("Error during login:", error.message);
+    throw new Error("Network error");
   }
 }
 

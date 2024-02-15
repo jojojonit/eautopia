@@ -2,9 +2,11 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../utilities/users-service";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function LoginForm({ setUser }) {
   const navigate = useNavigate();
+  const [error, setError] = useState();
 
   const onFinish = async (values) => {
     try {
@@ -18,10 +20,12 @@ export default function LoginForm({ setUser }) {
       console.log("Received values of form: ", user);
     } catch (error) {
       console.log("Unable to login", error);
+      setError(error.message);
     }
   };
   return (
     <>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <Form
         name="normal_login"
         className="login-form"
@@ -29,6 +33,7 @@ export default function LoginForm({ setUser }) {
           remember: true,
         }}
         onFinish={onFinish}
+        variant="filled"
       >
         <Form.Item
           name="email"
@@ -60,9 +65,9 @@ export default function LoginForm({ setUser }) {
           />
         </Form.Item>
 
-        <Form.Item name="remember" valuePropName="checked" noStyle>
+        {/* <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item>
           <Button
             type="primary"

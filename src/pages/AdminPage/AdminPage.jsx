@@ -71,7 +71,7 @@ export default function AdminPage({
 
     try {
       const response = await updateProduct(id, { price: value });
-      // loadProducts();
+      loadProducts();
       console.log("updated successfully", id);
     } catch (error) {
       console.log(error);
@@ -83,7 +83,7 @@ export default function AdminPage({
 
     try {
       const response = await updateProduct(id, { stock: value });
-      // loadProducts();
+      loadProducts();
       console.log("updated successfully", id);
     } catch (error) {
       console.log(error);

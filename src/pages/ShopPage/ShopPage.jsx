@@ -6,7 +6,6 @@ import "./ShopPage.css";
 
 export default function ShopPage({
   products,
-  setProducts,
   category,
   showDrawer,
   loadCart,
@@ -24,10 +23,6 @@ export default function ShopPage({
     : products;
   const productCategory = category.category;
   console.log("SHOP", products, productCategory);
-
-  // const handleCategoryChange = (category) => {
-  //   console.log("CATEGORY", category);
-  // };
 
   return (
     <>

@@ -54,26 +54,6 @@ export default function SingleProductPage({ user, products, handleAddToCart }) {
             </Button>
 
             <p>{product.description}</p>
-            {/* {product.notes.map((note, index) => (
-              <div key={index}>
-                <p>
-                  <b>HEAD</b> {note.head}
-                </p>
-                <p>
-                  <b>HEART</b> {note.heart}
-                </p>
-                <p>
-                  <b>BASE</b> {note.base}
-                </p>
-              </div>
-            ))} */}
-
-            {/* <Button
-              onClick={(event) => handleAddToCart(event, product)}
-              className="buy"
-            >
-              BUY {product.name}
-            </Button> */}
 
             <Reviews
               review={review}

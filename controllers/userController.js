@@ -54,14 +54,13 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user === null) {
-      res.status(401).json({ msg: "user not found" });
+      res.status(401).json({ error: "User Not Found" });
       return;
     }
 
     const check = await bcrypt.compare(password, user.password);
     if (!check) {
-      res.status(401).json({ msg: "wrong password" });
-      return;
+      return res.status(401).json({ error: "Wrong Password" });
     }
 
     const token = createJWT(user);

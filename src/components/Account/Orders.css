@@ -1,0 +1,16 @@
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-top: 20px;
+}
+    
+
+.order-card{
+    width: 300px
+}
+
+.head{
+   border-bottom: 1px solid #f5f5f5;
+}

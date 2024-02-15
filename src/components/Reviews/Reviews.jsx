@@ -1,4 +1,4 @@
-import { Collapse, Dropdown, Space, theme } from "antd";
+import { Collapse, Dropdown, Empty, Space, theme } from "antd";
 import ReviewsItem from "./ReviewsItem";
 import ReviewForm from "./ReviewForm";
 import {
@@ -10,7 +10,7 @@ import { useState } from "react";
 import "./Reviews.css";
 
 export default function Reviews({ review, product, user, loadReviews }) {
-  const reviews = review?.reviews || []; // Ensure that review.reviews is an array
+  const reviews = review?.reviews || [];
   console.log("REVIEW COMPONENT", review.reviews);
   const [sortOrder, setSortOrder] = useState("Most Recent");
 
@@ -128,17 +128,21 @@ export default function Reviews({ review, product, user, loadReviews }) {
             </a>
           </Dropdown>
         </div>
-        {sortedReviews.map((item, index) => (
-          <ReviewsItem
-            key={index}
-            id={item._id}
-            title={item.title}
-            body={item.body}
-            date={item.date}
-            rating={item.rating}
-            user={item.user_id.name}
-          />
-        ))}
+        {sortedReviews.length > 0 ? (
+          sortedReviews.map((item, index) => (
+            <ReviewsItem
+              key={index}
+              id={item._id}
+              title={item.title}
+              body={item.body}
+              date={item.date}
+              rating={item.rating}
+              user={item.user_id.name}
+            />
+          ))
+        ) : (
+          <Empty description="No reviews yet" />
+        )}
       </div>
     </>
   );

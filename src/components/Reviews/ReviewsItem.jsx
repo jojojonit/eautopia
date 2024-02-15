@@ -1,5 +1,5 @@
 import { HeartTwoTone } from "@ant-design/icons";
-import { Divider, Empty } from "antd";
+import { Divider } from "antd";
 import { format } from "date-fns";
 
 export default function ReviewsItem({ id, title, body, date, rating, user }) {

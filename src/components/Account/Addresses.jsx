@@ -8,6 +8,7 @@ import {
 } from "../../utilities/users-service";
 import AddressForm from "./AddressForm";
 import EditAddressForm from "./EditAddressForm";
+import "./Addresses.css";
 
 export default function Addresses({ user, addresses, loadAddresses }) {
   const [open, setOpen] = useState(false);
@@ -69,38 +70,48 @@ export default function Addresses({ user, addresses, loadAddresses }) {
   };
   return (
     <>
-      <h3>your addresses</h3>
-
-      {addressData.map((address, index) => (
-        <Card
-          key={index}
-          addressid={`${address._id}`}
-          title={`${address.firstName} ${address.lastName || ""}`}
-          style={{
-            width: 300,
-            border: address.default ? "1px solid #eb2f96" : "1px solid #d9d9d9",
-          }}
-          actions={[
-            <EditTwoTone
-              twoToneColor="#eb2f96"
-              key="edit"
-              onClick={() => handleEdit(address._id)}
-            />,
-            <DeleteTwoTone
-              twoToneColor="#eb2f96"
-              key="delete"
-              onClick={() => handleDelete(address._id)}
-            />,
-          ]}
-        >
-          <p>Street Address: {address.streetAddress}</p>
-          <p>Apartment: {address.apartment}</p>
-          <p>Country: {address.country || ""}</p>
-          <p>City: {address.city}</p>
-          <p>Postal Code: {address.postal || ""}</p>
-        </Card>
-      ))}
-      <Button onClick={handleOpen}>Add new address</Button>
+      <div className="head">
+        <h5>YOUR ADDRESSES</h5>
+        <Button className="add-address" onClick={handleOpen}>
+          Add new address
+        </Button>
+      </div>
+      <div className="card-container">
+        {addressData.map((address, index) => (
+          <Card
+            key={index}
+            addressid={`${address._id}`}
+            title={`${address.firstName} ${address.lastName || ""}`}
+            style={{
+              width: "300px",
+              border: address.default
+                ? "1px solid #eb2f96"
+                : "1px solid #d9d9d9",
+            }}
+            actions={[
+              <EditTwoTone
+                twoToneColor="#eb2f96"
+                key="edit"
+                onClick={() => handleEdit(address._id)}
+              />,
+              <DeleteTwoTone
+                twoToneColor="#eb2f96"
+                key="delete"
+                onClick={() => handleDelete(address._id)}
+              />,
+            ]}
+          >
+            <p>Street Address: {address.streetAddress}</p>
+            <p>Apartment: {address.apartment}</p>
+            <p>Country: {address.country || ""}</p>
+            <p>City: {address.city}</p>
+            <p>Postal Code: {address.postal || ""}</p>
+          </Card>
+        ))}
+      </div>
+      {/* <Button className="add-address" onClick={handleOpen}>
+        Add new address
+      </Button> */}
       <AddressForm
         open={open}
         onCreate={onCreate}

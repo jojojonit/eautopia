@@ -4,6 +4,7 @@ import Addresses from "./Addresses";
 import Orders from "./Orders";
 import { getAddresses } from "../../utilities/users-service";
 import { viewComplete } from "../../utilities/order-service";
+import "./DetailsContainer.css";
 
 export default function DetailsContainer({ current, user }) {
   const [addresses, setAddresses] = useState([]);
@@ -49,8 +50,7 @@ export default function DetailsContainer({ current, user }) {
 
   return (
     <>
-      <h2> {current} details</h2>
-      {detailsComponents[current]}
+      <div className="details">{detailsComponents[current]}</div>
     </>
   );
 }
