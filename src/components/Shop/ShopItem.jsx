@@ -19,19 +19,6 @@ export default function ShopItem({
     console.log("clicked", id);
   };
 
-  // const handleAddToCart = async (event) => {
-  //   event.stopPropagation(); // Stop the click event from propagating
-  //   const data = {
-  //     product_id: id,
-  //     name: name,
-  //     quantity: 1,
-  //     price: price,
-  //   };
-  //   console.log("to add CART", data);
-  //   const newOrderItem = await addToCart(data);
-  //   loadCart();
-  //   showDrawer();
-  // };
   return (
     <>
       <div

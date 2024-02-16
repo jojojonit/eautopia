@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 export default function ReviewForm({ user, product, loadReviews }) {
   const [rating, setRating] = useState(3);
 
-  // Set disabled status based on the availability of the user
   const isUserAvailable = !!user;
   const [componentDisabled, setComponentDisabled] = useState(!isUserAvailable);
 

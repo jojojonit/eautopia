@@ -8,7 +8,6 @@ const { checkToken } = require("../config/checkToken");
 router.get("/", productController.getAll);
 router.get("/perfumes", productController.getPerfumes);
 
-//admin routes
 router.post("/create", checkToken, checkAdmin, productController.createProduct);
 router.patch(
   "/:id/update",

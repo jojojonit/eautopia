@@ -12,12 +12,7 @@ const getAll = async (req, res) => {
 };
 
 function createJWT(user) {
-  return jwt.sign(
-    // data payload
-    { user },
-    process.env.SECRET,
-    { expiresIn: "24h" }
-  );
+  return jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
 }
 
 const create = async (req, res) => {
@@ -71,8 +66,6 @@ const login = async (req, res) => {
 };
 
 const updateAddress = async (req, res) => {
-  // const userId = req.user._id;
-  // console.log("userID", req.user._id);
   const { id } = req.params;
   const newAddress = req.body;
 

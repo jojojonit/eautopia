@@ -16,7 +16,7 @@
   }
 
   .review-container::-webkit-scrollbar {
-    width: 0; /* Set the width of the scrollbar to 0 */
+    width: 0;
   }
 
   .sort-button{

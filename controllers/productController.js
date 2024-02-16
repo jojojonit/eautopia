@@ -38,7 +38,6 @@ const updateProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({ error: "PRODUCT not found" });
     }
-    // product.name = newData.name;
 
     Object.keys(newData).forEach((key) => {
       if (product[key] !== undefined) {
@@ -70,7 +69,7 @@ const deleteProduct = async (req, res) => {
       deletedProduct: product,
     });
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

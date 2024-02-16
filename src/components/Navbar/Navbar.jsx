@@ -46,11 +46,9 @@ export default function Navbar({
             Search
           </a>
 
-          {/* <Button> */}
           <a href="#" onClick={showDrawer} className="link-button">
             Cart
           </a>
-          {/* </Button> */}
         </div>
       </nav>
     </>

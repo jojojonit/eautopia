@@ -1,6 +1,5 @@
 const Order = require("../models/Order.js");
 const OrderItem = require("../models/OrderItem.js");
-const Product = require("../models/Product.js");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -65,13 +64,11 @@ const createOrderItemByUser = async (req, res) => {
   try {
     const { product_id, quantity, price } = req.body;
 
-    // Check if there's an existing order for the user
     let order = await Order.findOne({
       user_id: req.user._id,
       completed: false,
     });
 
-    // If there's no existing order, create a new one
     if (!order) {
       order = new Order({
         user_id: req.user._id,
@@ -81,19 +78,16 @@ const createOrderItemByUser = async (req, res) => {
 
       await order.save();
     }
-    // Check if there's an existing OrderItem for the product in the current order
     let orderItem = await OrderItem.findOne({
       order_id: order._id,
       product_id: product_id,
     });
 
     if (orderItem) {
-      // If OrderItem already exists, increase the quantity and price
       orderItem.quantity += quantity;
       orderItem.price += price;
       await orderItem.save();
     } else {
-      // If OrderItem doesn't exist, create a new one
       const orderItem = new OrderItem({
         order_id: order._id,
         product_id: product_id,
@@ -102,7 +96,6 @@ const createOrderItemByUser = async (req, res) => {
       });
       await orderItem.save();
 
-      // Push the OrderItem _id into the items array of the corresponding Order
       order.items.push(orderItem._id);
       await order.save();
     }
@@ -122,10 +115,8 @@ const createOrderItem = async (req, res) => {
     const { _id } = req.body;
     const { product_id, quantity, price } = req.body;
 
-    // Check if there's an existing order for the user
     let order = await Order.findOne({ _id });
 
-    // If there's no existing order, create a new one
     if (!order) {
       order = new Order({
         // user_id: req.user._id,
@@ -135,19 +126,16 @@ const createOrderItem = async (req, res) => {
 
       await order.save();
     }
-    // Check if there's an existing OrderItem for the product in the current order
     let orderItem = await OrderItem.findOne({
       order_id: order._id,
       product_id: product_id,
     });
 
     if (orderItem) {
-      // If OrderItem already exists, increase the quantity and price
       orderItem.quantity += quantity;
       orderItem.price += price;
       await orderItem.save();
     } else {
-      // If OrderItem doesn't exist, create a new one
       const orderItem = new OrderItem({
         order_id: order._id,
         product_id: product_id,
@@ -156,7 +144,6 @@ const createOrderItem = async (req, res) => {
       });
       await orderItem.save();
 
-      // Push the OrderItem _id into the items array of the corresponding Order
       order.items.push(orderItem._id);
       await order.save();
     }
@@ -199,7 +186,6 @@ const deleteOrderItemByUser = async (req, res) => {
       return res.status(404).json({ error: "ORDER ITEM not found" });
     }
 
-    // Find the associated Order and remove the orderItem from its items array
     const order = await Order.findOneAndUpdate(
       { _id: orderItem.order_id },
       { $pull: { items: id } },
@@ -211,7 +197,7 @@ const deleteOrderItemByUser = async (req, res) => {
       deletedOrderItem: orderItem,
     });
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -237,13 +223,8 @@ const checkout = async (req, res) => {
     cancel_url: "http://localhost:5173/cancel",
   });
 
-  // Update the order status in your database
-  // Assuming you have a model named Order
-
-  // Extract order IDs from products
   const orderIds = products.map((product) => product.order_id);
 
-  // Update the completed field of the orders in the database
   await Order.updateMany(
     { _id: { $in: orderIds } },
     { $set: { completed: true } }

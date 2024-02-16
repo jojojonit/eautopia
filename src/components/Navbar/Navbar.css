@@ -16,15 +16,15 @@
     min-width: 30px;
     border-radius: 25px;
     height: 32px;
-    padding: 0 15px; /* Adjust padding as needed */
-    line-height: 32px; /* Center the text vertically */
-    text-align: center; /* Center the text horizontally */
+    padding: 0 15px;
+    line-height: 32px; 
+    text-align: center; 
     font-size: 12px;
-    text-decoration: none; /* Remove underline for links */
-    color: #333; /* Customize the text color */
+    text-decoration: none; 
+    color: #333; 
   }
 
   .link-button:hover {
-    background-color: #d9d9d9; /* Change background color on hover */
-    color: #000; /* Change text color on hover */
+    background-color: #d9d9d9; 
+    color: #000; 
   }
